@@ -12,6 +12,7 @@
       background: #000;
       overflow: hidden;
       color: #fff;
+      touch-action: none;
     }
 
     #zoom-container {
@@ -24,36 +25,37 @@
     }
 
     .box {
-  width: 150px;
-  height: 100px;
-  padding: 10px;
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: #000;
-  animation: drift 6s infinite ease-in-out, glow 3s infinite alternate ease-in-out;
-  cursor: grab;
-  position: absolute;
-  border: 2px solid #fff;
-  z-index: 1;
-}
+      width: 150px;
+      height: 100px;
+      padding: 10px;
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: #000;
+      animation: drift 6s infinite ease-in-out, glow 3s infinite alternate ease-in-out;
+      cursor: grab;
+      position: absolute;
+      border: 2px solid #fff;
+      z-index: 1;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
 
-.box a {
-  color: #fff;  /* Make text white */
-  text-decoration: none;  /* Remove underline */
-}
+    .box.active {
+      z-index: 1000;
+      cursor: grabbing;
+    }
 
-.box:hover {
-  transform: scale(1.2) rotate(5deg);
-  box-shadow: 0 12px 40px rgba(255, 255, 255, 1);
-  background: #222;
-}
-
+    .box a {
+      color: #fff;
+      text-decoration: none;
+    }
 
     .box:hover {
       transform: scale(1.2) rotate(5deg);
@@ -169,6 +171,7 @@
         width: 120px;
         height: 80px;
         animation: none;
+        font-size: 14px;
       }
 
       #iframe-container {
@@ -178,11 +181,23 @@
 
       #categories {
         flex-direction: column;
+        max-width: 80px;
+      }
+
+      .category {
+        padding: 8px;
+        font-size: 12px;
       }
 
       #zoom-controls {
-        left: 100px;
-        top: 50px;
+        left: auto;
+        right: 10px;
+        top: 10px;
+      }
+
+      .zoom-btn {
+        padding: 8px 12px;
+        font-size: 16px;
       }
     }
   </style>
@@ -197,7 +212,6 @@
     <div class="category" data-category="archives">Archives</div>
     <div class="category" data-category="workshops">Workshops</div>
     <div class="category" data-category="exhibitions">Public</div>
-    
   </div>
 
   <div id="zoom-controls">
@@ -206,104 +220,97 @@
   </div>
 
   <div id="zoom-container">
-    <!-- 30 Boxes with unique content -->
-    <!-- 30 Boxes with unique content -->
-  <!-- News -->
-  <div class="box news" data-iframe="https://artbase.rhizome.org/wiki/Q15312"><a href="#">Rhizome artbase</a></div>
-  <div class="box news" data-iframe="https://about.mouchette.org/visions-of-mouchette-org/"><a href="#">Documenting user generated responses in mouchette.org</a></div>
-  <div class="box news" data-iframe="https://archive.org/details/undocumented-events-and-object-permanence"><a href="#">Undocumented events and object permanence</a></div>
-   <div class="box news" data-iframe="nnuj.html"><a href="#">browser based visuals key navig</a></div>
+    <!-- Your existing boxes... -->
+ <!-- News -->
+ <div class="box news" data-iframe="https://artbase.rhizome.org/wiki/Q15312"><a href="#">Rhizome artbase</a></div>
+ <div class="box news" data-iframe="https://about.mouchette.org/visions-of-mouchette-org/"><a href="#">Documenting user generated responses in mouchette.org</a></div>
+ <div class="box news" data-iframe="https://archive.org/details/undocumented-events-and-object-permanence"><a href="#">Undocumented events and object permanence</a></div>
+  <div class="box news" data-iframe="nnuj.html"><a href="#">browser based visuals key navig</a></div>
 
-  <!-- Projects -->
-  <div class="box projects" data-iframe="https://hypersubjectivespaces.tumblr.com/"><a href="#">Hypersubjective spaces</a></div>
-  <div class="box projects" data-iframe="liquid.html"><a href="#">Liquid archiving </a></div>
+ <!-- Projects -->
+ <div class="box projects" data-iframe="https://hypersubjectivespaces.tumblr.com/"><a href="#">Hypersubjective spaces</a></div>
+ <div class="box projects" data-iframe="liquid.html"><a href="#">Liquid archiving </a></div>
 
-  <div class="box projects" data-iframe="MM.html"><a href="#">VJ animations browser based</a></div>
-   <div class="box projects" data-iframe="wblg.html"><a href="#">webgl with sounds</a></div>
-   <div class="box projects" data-iframe="gifs.html"><a href="#">gifs</a></div>
-   <div class="box projects" data-iframe="3.mp4"><a href="#">waiting to get classified</a></div>
-   <div class="box projects" data-iframe="1.mp4"><a href="#">the plan</a></div>
+ <div class="box projects" data-iframe="MM.html"><a href="#">VJ animations browser based</a></div>
+  <div class="box projects" data-iframe="wblg.html"><a href="#">webgl with sounds</a></div>
+  <div class="box projects" data-iframe="gifs.html"><a href="#">gifs</a></div>
+  <div class="box projects" data-iframe="3.mp4"><a href="#">waiting to get classified</a></div>
+  <div class="box projects" data-iframe="1.mp4"><a href="#">the plan</a></div>
 
-  <div class="box projects" data-iframe="boilerroomforgot.html"><a href="#">Boiler room forgot</a></div>
-  <div class="box projects" data-iframe="https://bowb.org/apii-artist-community-synergy-nikos-voyiatzis-antigoni-cheilari-cultural-association-pera-melana/"><a href="#">On Plants and Hands, documenting ethnobotanical knowledge  </a></div>
-  <div class="box projects" data-iframe="https://about.mouchette.org/nikos-fixes/"><a href="#">Preservation interface for mouchette.org</a></div>
-  <div class="box projects" data-iframe="https://bitcoingarden.tumblr.com/"><a href="#">Bitcoin garden</a></div>
-  <div class="box projects" data-iframe="https://ilu.servus.at/category/06-facebook-reactions.html"><a href="#">Remixing FB reactions</a></div>
-  <div class="box projects" data-iframe="CAMERASINBOILERROOM.html"><a href="#">Cameras in boiler room  </a></div>
-  <div class="box projects" data-iframe="https://www.discogs.com/ja/release/5546621-thereisamajorprobleminaustralia-cyborgjungle?srsltid=AfmBOor-6iu1NJalSZ2wOxWRr5pH2tcncd4JxAR16FFJWNaggz6Vsvc0"><a href="#">Cyborgjungle</a></div>
-  <div class="box projects" data-iframe="agirl.html"><a href="#">a girl</a></div>
-  
-  <div class="box projects" data-iframe="thethinker.html"><a href="#">thinker</a></div>
-  <!-- Texts -->
-  <div class="box texts" data-iframe="https://about.mouchette.org/archived-by-nikos/"><a href="#">((DAMN SITE MOUCHETTE!))</a></div>
-  <div class="box texts" data-iframe="https://networkcultures.org/longform/2015/11/06/the-effect-of-the-list/"><a href="#">The effect of the list</a></div>
-  <div class="box texts" data-iframe="https://networkcultures.org/blog/publication/lets-get-physical-a-sample-of-inc-longforms-2015-2020/"><a href="#">Let's Get Physical</a></div>
-  <div class="box texts" data-iframe="https://ilu.servus.at/category/10-immateriality.html"><a href="#">Pervasive Labour Union</a></div>
-  <div class="box texts" data-iframe="nikosbowb20122020.svg"><a href="#">From community archives to post digital folklore</a></div>
-
-  <div class="box texts" data-iframe="https://pzwiki.wdka.nl/mediadesign/User:%CE%94%CE%B5%CF%81%CE%B9%CE%B6%CE%B1%CE%BC%CE%B1%CF%84%CE%B6%CE%BF%CF%81%CF%80%CF%81%CE%BF%CE%BC%CF%80%CE%BB%CE%B5%CE%BC%CE%B9%CE%BD%CE%B1%CF%85%CF%83%CF%84%CF%81%CE%B1%CE%BB%CE%B9%CE%B1/Graduateresearchseminar/emo"><a href="#">The user profile as media object</a></div>
-
-  <div class="box texts" data-iframe="oi.jpg"><a href="#">The open+ness of identity</a></div>
-
-
-  <!-- Archives -->
-  <div class="box archives" data-iframe="subpage.html"><a href="#">Documenting and Preserving art library materials, ASFA</a></div>
-  <div class="box archives" data-iframe=""><a href="#">Documenting ERT archive</a></div>
-  <div class="box archives" data-iframe=""><a href="#">Advisory Board.Library 2.0. The future of libraries in the digital age</a></div>
-
-  <div class="box archives" data-iframe=""><a href="#">Collection management and Cataloguing in school libraries</a></div>
-  <div class="box archives" data-iframe=""><a href="#">Archiving, documenting, preserving mouchette.org </a></div>
-  <div class="box archives" data-iframe=""><a href="#">Information Literacy instruction HAEF</a></div>
-  <div class="box archives" data-iframe=""><a href="#">DESTE library</a></div>  
-  <!-- Workshops -->
-  <div class="box workshops" data-iframe="https://about.mouchette.org/wp-content/uploads/2020/12/Archives_in_transit_Digital_materials_for_educators-2020-21_eng.pdf"><a href="#">Archives in transit</a></div>
-  <div class="box workshops" data-iframe=" "><a href="#">Understanding the search algorithm, ASF/a></div>
- <div class="box workshops" data-iframe="https://www.onassis.org/el/whats-on/plasmata"><a href="#">Plasmata: Dreams, Data, and Bodies, OCC</a></div>
- <div class="box workshops" data-iframe="https://www.onassis.org/whats-on/archives-transit-world-libraries-artificial-intelligence/archives-transit-world-libraries-artificial-intelligence-educational-material"><a href="#">Educational material.Archives in Transit</a></div>
- <div class="box workshops" data-iframe="https://maria-varela.com/portfolio/collage-remix-appropriation-archives/"><a href="#">Collage, Remix, and the Digital Cavafy Archive</a></div>
- <div class="box workshops" data-iframe=" "><a href="#">Archive, memory, new forms of community</a></div>
- <div class="box workshops" data-iframe=" "><a href="#">For educators.From the world of libraries to AI</a></div>
- <div class="box workshops" data-iframe=" "><a href="#">Net art vs science, Athens Science Fest</a></div>
- <div class="box workshops" data-iframe=" "><a href="#">Remixing Cavafy w. Thodoris Chiotis</a></div>
- <div class="box workshops" data-iframe=" "><a href="#">Member of selection commitee. Communication of science Prize RS ATHINA</a></div>
-
- <div class="box workshops" data-iframe=" "><a href="#">Into the unknown, OCC</a></div>
- <div class="box workshops" data-iframe=" "><a href="#">Digital revolution, OCC</a></div>
- <div class="box workshops" data-iframe=" "><a href="#">Hybrid cities, OCC</a></div>
- <div class="box workshops" data-iframe=" "><a href="#">Art, archives and networks, OCC</a></div>
- <div class="box workshops" data-iframe=" "><a href="#">Appropriating cultural heritage items, HAEF</a></div>
- <div class="box workshops" data-iframe= https://archive2alive.eu/"><a href="#"> Archive to Alive, IDEC</a></div>
- <div class="box workshops" data-iframe=""><a href="#"> Digital competencies and adult learners,IDEC</a></div>
- <div class="box workshops" data-iframe="https://www.asseffebi.eu/project/cult-tips/?lang=en"><a href="#">Cult tips: innovative teaching practices, IDEC</a></div>
- <div class="box workshops" data-iframe="https://e-trainingcentre.gr/course/index.php?categoryid=22"><a href="#">Computational thinking, guide for educators, IDEC</a></div>
-
- <div class="box workshops" data-iframe="https://2016.adaf.gr/el/event/3d-pop-in-the-browser/"><a href="#">3d pop in the browser, ADAF</a></div>
-
- <!-- Exhibitions -->
- <div class="box exhibitions" data-iframe=" "><a href="#">Unstable Media WPG</a></div>
- <div class="box exhibitions" data-iframe=" "><a href="#">The wrong biennial</a></div>
- <div class="box exhibitions" data-iframe="https://www.furtherfield.org/computers-and-capital-the-rise-of-digital-currency/"><a href="#">Computers and capital</a></div>
- <div class="box exhibitions" data-iframe="CAMERASINBOILERROOM.html"><a href="#"> Cameras in boiler room. Lists and  surveillance </a></div>
- <div class="box exhibitions" data-iframe=" "><a href="#">Platform as gallery </a></div>
- <div class="box exhibitions" data-iframe="https://sharethisart-blog.tumblr.com/"><a href="#">Share this, art and social networks</a></div>
- <div class="box exhibitions" data-iframe=" "><a href="#">404 pages</a></div>
- <div class="box exhibitions" data-iframe=" "><a href="#">Audiovisual Posthumanism </a></div>
- <div class="box exhibitions" data-iframe=" "><a href="#">“Afronaut(a) Film Festival</a></div>
- <div class="box exhibitions" data-iframe="https://about.mouchette.org/reboot/"><a href="#">Reboot: pioneering digital art</a></div>
- <div class="box exhibitions" data-iframe="lecturenikosdatasets.pdf"><a href="#">From lists to datasets</a></div>
- <div class="box exhibitions" data-iframe=""><a href="#">Chihuahua or muffin- how to confuse machine learning. Guided tour</a></div>
- <div class="box exhibitions" data-iframe="https://about.mouchette.org/wp-content/uploads/2022/10/ISEA.visions.pdf"><a href="#">
-  Martine Neddam at ISEA</a></div>
-
-  <div class="box exhibitions" data-iframe="https://discuss-learning.eu/2021-event/"><a href="#">Design thinking at discuss learning conference</a></div>
-  <div class="box exhibitions" data-iframe="https://networkcultures.org/blog/publication/zero-infinite-3-listing-technology/"><a href="#">podcast Listing Technology
- </a></div>
+ <div class="box projects" data-iframe="boilerroomforgot.html"><a href="#">Boiler room forgot</a></div>
+ <div class="box projects" data-iframe="https://bowb.org/apii-artist-community-synergy-nikos-voyiatzis-antigoni-cheilari-cultural-association-pera-melana/"><a href="#">On Plants and Hands, documenting ethnobotanical knowledge  </a></div>
+ <div class="box projects" data-iframe="https://about.mouchette.org/nikos-fixes/"><a href="#">Preservation interface for mouchette.org</a></div>
+ <div class="box projects" data-iframe="https://bitcoingarden.tumblr.com/"><a href="#">Bitcoin garden</a></div>
+ <div class="box projects" data-iframe="https://ilu.servus.at/category/06-facebook-reactions.html"><a href="#">Remixing FB reactions</a></div>
+ <div class="box projects" data-iframe="CAMERASINBOILERROOM.html"><a href="#">Cameras in boiler room  </a></div>
+ <div class="box projects" data-iframe="https://www.discogs.com/ja/release/5546621-thereisamajorprobleminaustralia-cyborgjungle?srsltid=AfmBOor-6iu1NJalSZ2wOxWRr5pH2tcncd4JxAR16FFJWNaggz6Vsvc0"><a href="#">Cyborgjungle</a></div>
+ <div class="box projects" data-iframe="agirl.html"><a href="#">a girl</a></div>
  
-   <!-- New Image Container -->
-   <div class="box image-container">
-    <img id="random-image" src="" alt="Random Image" />
-  </div>
-  </div>
+ <div class="box projects" data-iframe="thethinker.html"><a href="#">thinker</a></div>
+ <!-- Texts -->
+ <div class="box texts" data-iframe="https://about.mouchette.org/archived-by-nikos/"><a href="#">((DAMN SITE MOUCHETTE!))</a></div>
+ <div class="box texts" data-iframe="https://networkcultures.org/longform/2015/11/06/the-effect-of-the-list/"><a href="#">The effect of the list</a></div>
+ <div class="box texts" data-iframe="https://networkcultures.org/blog/publication/lets-get-physical-a-sample-of-inc-longforms-2015-2020/"><a href="#">Let's Get Physical</a></div>
+ <div class="box texts" data-iframe="https://ilu.servus.at/category/10-immateriality.html"><a href="#">Pervasive Labour Union</a></div>
+ <div class="box texts" data-iframe="nikosbowb20122020.svg"><a href="#">From community archives to post digital folklore</a></div>
+
+ <div class="box texts" data-iframe="https://pzwiki.wdka.nl/mediadesign/User:%CE%94%CE%B5%CF%81%CE%B9%CE%B6%CE%B1%CE%BC%CE%B1%CF%84%CE%B6%CE%BF%CF%81%CF%80%CF%81%CE%BF%CE%BC%CF%80%CE%BB%CE%B5%CE%BC%CE%B9%CE%BD%CE%B1%CF%85%CF%83%CF%84%CF%81%CE%B1%CE%BB%CE%B9%CE%B1/Graduateresearchseminar/emo"><a href="#">The user profile as media object</a></div>
+
+ <div class="box texts" data-iframe="oi.jpg"><a href="#">The open+ness of identity</a></div>
+
+
+ <!-- Archives -->
+ <div class="box archives" data-iframe="subpage.html"><a href="#">Documenting and Preserving art library materials, ASFA</a></div>
+ <div class="box archives" data-iframe=""><a href="#">Documenting ERT archive</a></div>
+ <div class="box archives" data-iframe=""><a href="#">Advisory Board.Library 2.0. The future of libraries in the digital age</a></div>
+
+ <div class="box archives" data-iframe=""><a href="#">Collection management and Cataloguing in school libraries</a></div>
+ <div class="box archives" data-iframe=""><a href="#">Archiving, documenting, preserving mouchette.org </a></div>
+ <div class="box archives" data-iframe=""><a href="#">Information Literacy instruction HAEF</a></div>
+ <div class="box archives" data-iframe=""><a href="#">DESTE library</a></div>  
+ <!-- Workshops -->
+ <div class="box workshops" data-iframe="https://about.mouchette.org/wp-content/uploads/2020/12/Archives_in_transit_Digital_materials_for_educators-2020-21_eng.pdf"><a href="#">Archives in transit</a></div>
+ <div class="box workshops" data-iframe=" "><a href="#">Understanding the search algorithm, ASF/a></div>
+<div class="box workshops" data-iframe="https://www.onassis.org/el/whats-on/plasmata"><a href="#">Plasmata: Dreams, Data, and Bodies, OCC</a></div>
+<div class="box workshops" data-iframe="https://www.onassis.org/whats-on/archives-transit-world-libraries-artificial-intelligence/archives-transit-world-libraries-artificial-intelligence-educational-material"><a href="#">Educational material.Archives in Transit</a></div>
+<div class="box workshops" data-iframe="https://maria-varela.com/portfolio/collage-remix-appropriation-archives/"><a href="#">Collage, Remix, and the Digital Cavafy Archive</a></div>
+<div class="box workshops" data-iframe=" "><a href="#">Archive, memory, new forms of community</a></div>
+<div class="box workshops" data-iframe=" "><a href="#">For educators.From the world of libraries to AI</a></div>
+<div class="box workshops" data-iframe=" "><a href="#">Net art vs science, Athens Science Fest</a></div>
+<div class="box workshops" data-iframe=" "><a href="#">Remixing Cavafy w. Thodoris Chiotis</a></div>
+<div class="box workshops" data-iframe=" "><a href="#">Member of selection commitee. Communication of science Prize RS ATHINA</a></div>
+
+<div class="box workshops" data-iframe=" "><a href="#">Into the unknown, OCC</a></div>
+<div class="box workshops" data-iframe=" "><a href="#">Digital revolution, OCC</a></div>
+<div class="box workshops" data-iframe=" "><a href="#">Hybrid cities, OCC</a></div>
+<div class="box workshops" data-iframe=" "><a href="#">Art, archives and networks, OCC</a></div>
+<div class="box workshops" data-iframe=" "><a href="#">Appropriating cultural heritage items, HAEF</a></div>
+<div class="box workshops" data-iframe= https://archive2alive.eu/"><a href="#"> Archive to Alive, IDEC</a></div>
+<div class="box workshops" data-iframe=""><a href="#"> Digital competencies and adult learners,IDEC</a></div>
+<div class="box workshops" data-iframe="https://www.asseffebi.eu/project/cult-tips/?lang=en"><a href="#">Cult tips: innovative teaching practices, IDEC</a></div>
+<div class="box workshops" data-iframe="https://e-trainingcentre.gr/course/index.php?categoryid=22"><a href="#">Computational thinking, guide for educators, IDEC</a></div>
+
+<div class="box workshops" data-iframe="https://2016.adaf.gr/el/event/3d-pop-in-the-browser/"><a href="#">3d pop in the browser, ADAF</a></div>
+
+<!-- Exhibitions -->
+<div class="box exhibitions" data-iframe=" "><a href="#">Unstable Media WPG</a></div>
+<div class="box exhibitions" data-iframe=" "><a href="#">The wrong biennial</a></div>
+<div class="box exhibitions" data-iframe="https://www.furtherfield.org/computers-and-capital-the-rise-of-digital-currency/"><a href="#">Computers and capital</a></div>
+<div class="box exhibitions" data-iframe="CAMERASINBOILERROOM.html"><a href="#"> Cameras in boiler room. Lists and  surveillance </a></div>
+<div class="box exhibitions" data-iframe=" "><a href="#">Platform as gallery </a></div>
+<div class="box exhibitions" data-iframe="https://sharethisart-blog.tumblr.com/"><a href="#">Share this, art and social networks</a></div>
+<div class="box exhibitions" data-iframe=" "><a href="#">404 pages</a></div>
+<div class="box exhibitions" data-iframe=" "><a href="#">Audiovisual Posthumanism </a></div>
+<div class="box exhibitions" data-iframe=" "><a href="#">“Afronaut(a) Film Festival</a></div>
+<div class="box exhibitions" data-iframe="https://about.mouchette.org/reboot/"><a href="#">Reboot: pioneering digital art</a></div>
+<div class="box exhibitions" data-iframe="lecturenikosdatasets.pdf"><a href="#">From lists to datasets</a></div>
+<div class="box exhibitions" data-iframe=""><a href="#">Chihuahua or muffin- how to confuse machine learning. Guided tour</a></div>
+<div class="box exhibitions" data-iframe="https://about.mouchette.org/wp-content/uploads/2022/10/ISEA.visions.pdf"><a href="#">
+ Martine Neddam at ISEA</a></div>
+
+ <div class="box exhibitions" data-iframe="https://discuss-learning.eu/2021-event/"><a href="#">Design thinking at discuss learning conference</a></div>
+ <div class="box exhibitions" data-iframe="https://networkcultures.org/blog/publication/zero-infinite-3-listing-technology/"><a href="#">podcast Listing Technology
+</a></div>  </div>
 
   <div id="iframe-container">
     <button class="close-btn">&#x2716;</button>
@@ -312,8 +319,11 @@
 
   <script>
     let zoomLevel = 1;
+    let isDragging = false;
+    let currentBox = null;
+    let startX, startY, boxStartX, boxStartY;
 
-    // Zoom functionality using buttons
+    // Zoom functionality
     document.getElementById('zoom-in').addEventListener('click', () => {
       if (zoomLevel < 3) {
         zoomLevel += 0.1;
@@ -339,51 +349,99 @@
 
     randomizeBoxPositions();
 
-    // Handle box dragging and iframe opening
+    // Improved drag handling functions
+    function handleStart(e) {
+      if (e.target.closest('.box')) {
+        isDragging = true;
+        currentBox = e.target.closest('.box');
+        currentBox.classList.add('active');
+
+        // Get touch or mouse coordinates
+        const point = e.touches ? e.touches[0] : e;
+        startX = point.clientX;
+        startY = point.clientY;
+
+        // Get box's current position
+        const rect = currentBox.getBoundingClientRect();
+        boxStartX = rect.left;
+        boxStartY = rect.top;
+
+        e.preventDefault();
+      }
+    }
+
+    function handleMove(e) {
+      if (!isDragging || !currentBox) return;
+
+      const point = e.touches ? e.touches[0] : e;
+      const deltaX = point.clientX - startX;
+      const deltaY = point.clientY - startY;
+
+      currentBox.style.left = `${boxStartX + deltaX}px`;
+      currentBox.style.top = `${boxStartY + deltaY}px`;
+
+      e.preventDefault();
+    }
+
+    function handleEnd(e) {
+      if (isDragging && currentBox) {
+        const wasDragged = 
+          Math.abs((e.touches ? e.changedTouches[0].clientX : e.clientX) - startX) > 5 || 
+          Math.abs((e.touches ? e.changedTouches[0].clientY : e.clientY) - startY) > 5;
+        
+        isDragging = false;
+        currentBox.classList.remove('active');
+
+        // Only open iframe if the box wasn't dragged
+        if (!wasDragged) {
+          const iframeSrc = currentBox.getAttribute('data-iframe');
+          if (iframeSrc && iframeSrc !== '#') {
+            const iframeContainer = document.getElementById('iframe-container');
+            const iframe = iframeContainer.querySelector('iframe');
+            iframe.src = iframeSrc;
+            iframeContainer.style.display = 'block';
+          }
+        }
+        
+        currentBox = null;
+      }
+    }
+
+    // Event listeners for both touch and mouse events
+    document.addEventListener('mousedown', handleStart);
+    document.addEventListener('mousemove', handleMove);
+    document.addEventListener('mouseup', handleEnd);
+    document.addEventListener('touchstart', handleStart, { passive: false });
+    document.addEventListener('touchmove', handleMove, { passive: false });
+    document.addEventListener('touchend', handleEnd);
+
+    // Add click handlers for boxes
     document.querySelectorAll('.box').forEach((box) => {
-      box.addEventListener('pointerdown', (e) => {
-        const offsetX = e.clientX - box.getBoundingClientRect().left;
-        const offsetY = e.clientY - box.getBoundingClientRect().top;
-
-        function onPointerMove(e) {
-          box.style.left = `${e.clientX - offsetX}px`;
-          box.style.top = `${e.clientY - offsetY}px`;
+      box.addEventListener('click', (e) => {
+        if (!isDragging) {
+          const iframeSrc = box.getAttribute('data-iframe');
+          if (iframeSrc && iframeSrc !== '#') {
+            const iframeContainer = document.getElementById('iframe-container');
+            const iframe = iframeContainer.querySelector('iframe');
+            iframe.src = iframeSrc;
+            iframeContainer.style.display = 'block';
+            e.preventDefault();
+          }
         }
-
-        document.addEventListener('pointermove', onPointerMove);
-
-        document.addEventListener('pointerup', () => {
-          document.removeEventListener('pointermove', onPointerMove);
-        }, { once: true });
       });
+    });
 
-      // Add touch events for mobile devices
-      box.addEventListener('touchstart', (e) => {
-        const touch = e.touches[0];
-        const offsetX = touch.clientX - box.getBoundingClientRect().left;
-        const offsetY = touch.clientY - box.getBoundingClientRect().top;
-
-        function onTouchMove(e) {
-          const touch = e.touches[0];
-          box.style.left = `${touch.clientX - offsetX}px`;
-          box.style.top = `${touch.clientY - offsetY}px`;
-        }
-
-        document.addEventListener('touchmove', onTouchMove);
-
-        document.addEventListener('touchend', () => {
-          document.removeEventListener('touchmove', onTouchMove);
-        }, { once: true });
-      });
-
-      box.addEventListener('click', () => {
-        const iframeSrc = box.getAttribute('data-iframe');
-        if (iframeSrc && iframeSrc !== '#') {
-          const iframeContainer = document.getElementById('iframe-container');
-          const iframe = iframeContainer.querySelector('iframe');
-          iframe.src = iframeSrc;
-          iframeContainer.style.display = 'block';
-        }
+    // Category filtering
+    document.querySelectorAll('#categories .category').forEach((categoryButton) => {
+      categoryButton.addEventListener('click', () => {
+        const category = categoryButton.getAttribute('data-category');
+        document.querySelectorAll('.box').forEach((box) => {
+          if (category === 'all' || box.classList.contains(category)) {
+            box.style.display = 'flex';
+          } else {
+            box.style.display = 'none';
+          }
+        });
       });
     });
 
@@ -395,27 +453,12 @@
       iframeContainer.style.display = 'none';
     });
 
-    // Category filtering
-    document.querySelectorAll('#categories .category').forEach((categoryButton) => {
-      categoryButton.addEventListener('click', () => {
-        const category = categoryButton.getAttribute('data-category');
-        document.querySelectorAll('.box').forEach((box) => {
-          if (category === 'all' || box.classList.contains(category)) {
-            box.style.display = 'block';
-          } else {
-            box.style.display = 'none';
-          }
-        });
-      });
-    });
-
-        // Random image display
-        const images = [
+    // Random image handling
+    const images = [
       '4tet.png',
       '4tet.png',
       '4tet.png',
       '4tet.png'
-      
     ];
 
     function getRandomImage() {
@@ -424,10 +467,7 @@
       imageElement.src = images[randomIndex];
     }
 
-    // Change the image every 5 seconds
     setInterval(getRandomImage, 5000);
-
-    // Load an initial image
     getRandomImage();
   </script>
 
