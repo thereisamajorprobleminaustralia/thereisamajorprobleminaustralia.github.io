@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="380.24405mm"
+   height="1245.6255mm"
+   viewBox="0 0 380.24405 1245.6256"
+   version="1.1"
+   id="svg1832"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="nikosbowb20122020.svg">
+  <defs
+     id="defs1826">
+    <filter
+       inkscape:label="Monochrome Transparency"
+       inkscape:menu="Fill and Transparency"
+       inkscape:menu-tooltip="Convert to a colorizable transparent positive or negative"
+       style="color-interpolation-filters:sRGB"
+       id="filter4619">
+      <feColorMatrix
+         type="luminanceToAlpha"
+         result="fbSourceGraphic"
+         id="feColorMatrix4611" />
+      <feFlood
+         flood-color="rgb(134,39,24)"
+         result="result1"
+         flood-opacity="1"
+         id="feFlood4613" />
+      <feComposite
+         operator="out"
+         in2="fbSourceGraphic"
+         result="result2"
+         id="feComposite4615" />
+      <feComposite
+         operator="in"
+         in2="SourceGraphic"
+         id="feComposite4617" />
+    </filter>
+    <filter
+       inkscape:label="Monochrome Transparency"
+       inkscape:menu="Fill and Transparency"
+       inkscape:menu-tooltip="Convert to a colorizable transparent positive or negative"
+       style="color-interpolation-filters:sRGB"
+       id="filter4728">
+      <feColorMatrix
+         type="luminanceToAlpha"
+         result="fbSourceGraphic"
+         id="feColorMatrix4720" />
+      <feFlood
+         flood-color="rgb(134,39,24)"
+         result="result1"
+         flood-opacity="1"
+         id="feFlood4722" />
+      <feComposite
+         operator="out"
+         in2="fbSourceGraphic"
+         result="result2"
+         id="feComposite4724" />
+      <feComposite
+         operator="in"
+         in2="SourceGraphic"
+         id="feComposite4726" />
+    </filter>
+    <filter
+       inkscape:label="Monochrome Transparency"
+       inkscape:menu="Fill and Transparency"
+       inkscape:menu-tooltip="Convert to a colorizable transparent positive or negative"
+       style="color-interpolation-filters:sRGB"
+       id="filter4738">
+      <feColorMatrix
+         type="luminanceToAlpha"
+         result="fbSourceGraphic"
+         id="feColorMatrix4730" />
+      <feFlood
+         flood-color="rgb(134,39,24)"
+         result="result1"
+         flood-opacity="1"
+         id="feFlood4732" />
+      <feComposite
+         operator="out"
+         in2="fbSourceGraphic"
+         result="result2"
+         id="feComposite4734" />
+      <feComposite
+         operator="in"
+         in2="SourceGraphic"
+         id="feComposite4736" />
+    </filter>
+    <filter
+       inkscape:label="Monochrome Transparency"
+       inkscape:menu="Fill and Transparency"
+       inkscape:menu-tooltip="Convert to a colorizable transparent positive or negative"
+       style="color-interpolation-filters:sRGB"
+       id="filter4811">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k4="1"
+         result="result1"
+         id="feComposite4803"
+         k1="0"
+         k2="0"
+         k3="0" />
+      <feMerge
+         id="feMerge4809"
+         result="fbSourceGraphic">
+        <feMergeNode
+           in="result1"
+           id="feMergeNode4805" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode4807" />
+      </feMerge>
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix4813" />
+      <feColorMatrix
+         id="feColorMatrix4815"
+         type="luminanceToAlpha"
+         result="fbSourceGraphic"
+         in="fbSourceGraphic" />
+      <feFlood
+         id="feFlood4817"
+         flood-color="rgb(134,39,24)"
+         result="result1"
+         flood-opacity="1" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite4819"
+         operator="out"
+         result="result2" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite4821"
+         operator="in" />
+    </filter>
+    <filter
+       inkscape:label="Monochrome Transparency"
+       inkscape:menu="Fill and Transparency"
+       inkscape:menu-tooltip="Convert to a colorizable transparent positive or negative"
+       style="color-interpolation-filters:sRGB"
+       id="filter4679">
+      <feColorMatrix
+         type="luminanceToAlpha"
+         result="fbSourceGraphic"
+         id="feColorMatrix4671" />
+      <feFlood
+         flood-color="rgb(134,39,24)"
+         result="result1"
+         flood-opacity="1"
+         id="feFlood4673" />
+      <feComposite
+         operator="out"
+         in2="fbSourceGraphic"
+         result="result2"
+         id="feComposite4675" />
+      <feComposite
+         operator="in"
+         in2="SourceGraphic"
+         id="feComposite4677" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.24748737"
+     inkscape:cx="-952.54036"
+     inkscape:cy="1666.3579"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1051"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata1829">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(55.138663,246.44559)">
+    <a
+       id="a4933"
+       transform="matrix(1.0523012,0,0,1.8546655,4.6878062,-80.224481)">
+      <rect
+         y="-89.62323"
+         x="-56.852989"
+         height="671.61731"
+         width="361.34525"
+         id="rect2398"
+         style="opacity:1;fill:#19e6b0;fill-opacity:0.41293532;fill-rule:nonzero;stroke:#8899f0;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.15118109;stroke-opacity:1" />
+    </a>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.80101109px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22971117"
+       x="-51.606319"
+       y="-179.07578"
+       id="text2402"><tspan
+         sodipodi:role="line"
+         id="tspan2400"
+         x="-51.606319"
+         y="-179.07578"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';stroke-width:0.22971117">From community archives</tspan><tspan
+         sodipodi:role="line"
+         x="-51.606319"
+         y="-166.82451"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';stroke-width:0.22971117"
+         id="tspan2404">to post digital folklore</tspan></text>
+    <text
+       id="text2410"
+       y="-64.842285"
+       x="64.382355"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.80101109px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22971117"
+       xml:space="preserve"><tspan
+         id="tspan2408"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.69999981px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.22971117"
+         y="-64.842285"
+         x="64.382355"
+         sodipodi:role="line">Community archives </tspan><tspan
+         style="font-size:4.90050554px;stroke-width:0.22971117"
+         y="-51.532207"
+         x="64.382355"
+         sodipodi:role="line"
+         id="tspan2422" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.80101109px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22971117"
+       x="103.93825"
+       y="-53.595161"
+       id="text2416"><tspan
+         sodipodi:role="line"
+         x="103.93825"
+         y="-53.595161"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.90050554px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.22971117"
+         id="tspan2414">JA Bastian. Owning Memory.</tspan></text>
+    <text
+       id="text2426"
+       y="-45.063034"
+       x="103.93825"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.80101109px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22971117"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.22971117"
+         y="-45.063034"
+         x="103.93825"
+         sodipodi:role="line"
+         id="tspan2460">Archive, memory, new forms of  community. </tspan><tspan
+         style="font-size:4.90050554px;stroke-width:0.22971117"
+         y="-32.811771"
+         x="103.93825"
+         sodipodi:role="line"
+         id="tspan6276" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.80101109px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22971117"
+       x="62.856735"
+       y="119.05628"
+       id="text2450"><tspan
+         sodipodi:role="line"
+         x="62.856735"
+         y="119.05628"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.22971117"
+         id="tspan2446">Early web experience</tspan><tspan
+         id="tspan2448"
+         sodipodi:role="line"
+         x="62.856735"
+         y="131.30754"
+         style="font-size:4.90050554px;stroke-width:0.22971117" /></text>
+    <a
+       id="a961"
+       xlink:href="http://mouchette.org/cat/index.html"
+       target="bLANK">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.80101109px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22971117"
+         x="62.34906"
+         y="128.1194"
+         id="text2454"><tspan
+           sodipodi:role="line"
+           x="62.34906"
+           y="128.1194"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.90050554px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.22971117"
+           id="tspan2452">Yahoo Geocities, mouchette.org</tspan></text>
+    </a>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.80101109px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22971117"
+       x="109.85508"
+       y="157.78632"
+       id="text6284"><tspan
+         sodipodi:role="line"
+         x="109.85508"
+         y="157.78632"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.90050554px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.22971117"
+         id="tspan6282">Annet Dekker- Networks of care, rescuing mouchette</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.80101109px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22971117"
+       x="60.966854"
+       y="141.29797"
+       id="text2458"><tspan
+         id="tspan2456"
+         sodipodi:role="line"
+         x="60.966854"
+         y="141.29797"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.22971117">Early platforms, network communities, 90s.</tspan></text>
+    <text
+       id="text2468"
+       y="255.50415"
+       x="64.579071"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.80101109px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22971117"
+       xml:space="preserve"><tspan
+         id="tspan2464"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.69999981px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.22971117"
+         y="255.50415"
+         x="64.579071"
+         sodipodi:role="line">Web2 and user generated content  </tspan><tspan
+         style="font-size:4.90050554px;stroke-width:0.22971117"
+         y="268.81424"
+         x="64.579071"
+         sodipodi:role="line"
+         id="tspan2466" /></text>
+    <a
+       id="a2478"
+       xlink:href="https://oneterabyteofkilobyteage.tumblr.com/"
+       target="blank"
+       transform="matrix(0.86819977,0,0,0.86819977,98.238349,127.36642)">
+      <text
+         id="text2472"
+         y="162.62946"
+         x="12.095238"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           id="tspan2470"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332"
+           y="162.62946"
+           x="12.095238"
+           sodipodi:role="line">Lialina and Espenshied,</tspan></text>
+    </a>
+    <text
+       id="text2476"
+       y="296.29575"
+       x="108.89439"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.80101109px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22971117"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.22971117"
+         y="296.29575"
+         x="108.89439"
+         sodipodi:role="line"
+         id="tspan6186">Digital folklore 00s- 10s.</tspan></text>
+    <a
+       id="a6184"
+       xlink:href="https://hypersubjectivespaces.tumblr.com/"
+       target="blank"
+       transform="matrix(0.86819977,0,0,0.86819977,62.334916,143.53346)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="88.162949"
+         y="162.72395"
+         id="text6178"><tspan
+           sodipodi:role="line"
+           x="88.162949"
+           y="162.72395"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332"
+           id="tspan6176">N.Voyiatzis Hypersubjective spaces</tspan></text>
+    </a>
+    <a
+       id="a6192"
+       xlink:href="https://3dwarehouse.sketchup.com/?hl=en"
+       target="blank"
+       transform="matrix(0.86819977,0,0,0.86819977,98.099178,136.38803)">
+      <text
+         id="text6190"
+         y="171.32292"
+         x="12.284226"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332"
+           y="171.32292"
+           x="12.284226"
+           id="tspan6188"
+           sodipodi:role="line">Warehouse</tspan></text>
+    </a>
+    <a
+       id="a6226"
+       xlink:href="http://www.morehshin.com/material-speculation-isis/"
+       target="blank"
+       transform="matrix(0.86819977,0,0,0.86819977,128.47639,322.13121)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="10.583333"
+         y="231.42113"
+         id="text6204"><tspan
+           sodipodi:role="line"
+           x="10.583333"
+           y="231.42113"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332"
+           id="tspan6202">Moreshin Allahyari- Material speculation</tspan></text>
+    </a>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.80101109px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22971117"
+       x="75.521912"
+       y="482.4581"
+       id="text6210"><tspan
+         id="tspan6208"
+         sodipodi:role="line"
+         x="75.521912"
+         y="482.4581"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.69999981px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.22971117">Post digital folklore.</tspan></text>
+    <text
+       id="text6250"
+       y="853.65308"
+       x="-20.775612"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.5562706px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.41147506"
+       xml:space="preserve"><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.36173725px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';stroke-width:0.41147506"
+         y="853.65308"
+         x="-20.775612"
+         sodipodi:role="line"
+         id="tspan947">The future was now, full of post-electronic</tspan><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.36173725px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';stroke-width:0.41147506"
+         y="875.59839"
+         x="-20.775612"
+         sodipodi:role="line"
+         id="tspan951">automatic- algorithmic- digital folklore...  </tspan><tspan
+         style="font-size:8.7781353px;stroke-width:0.41147506"
+         y="897.54376"
+         x="-20.775612"
+         sodipodi:role="line"
+         id="tspan6248" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.80101109px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22971117"
+       x="103.61008"
+       y="-38.007618"
+       id="text6280"><tspan
+         sodipodi:role="line"
+         id="tspan6278"
+         x="103.61008"
+         y="-38.007618"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.22971117">Resistance. Amateur archiving. 60s, oral history. </tspan></text>
+    <a
+       id="a4835"
+       xlink:href="http://drivedrive.com/mouchette/censored.html"
+       target="blank"
+       transform="matrix(1.8046292,0,0,1.8046292,-114.35491,2.0623156)">
+      <image
+         sodipodi:absref="C:\Users\nikol\Desktop\bowb nikos 20 12 2020\freemouchettebanner.gif"
+         xlink:href="freemouchettebanner.gif"
+         width="123.825"
+         height="15.875"
+         preserveAspectRatio="none"
+         id="image4584"
+         x="92.841499"
+         y="89.630569"
+         style="filter:url(#filter4619)" />
+    </a>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.45031548px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#ff34ff;fill-opacity:0.81592042;stroke:none;stroke-width:0.29180425;filter:url(#filter4738)"
+       x="-8.375536"
+       y="290.37164"
+       id="text4623"
+       transform="matrix(0.94129294,0,0,0.69397222,-2.3619559,51.218066)"><tspan
+         sodipodi:role="line"
+         id="tspan4621"
+         x="-8.375536"
+         y="290.37164"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff34ff;fill-opacity:0.81592042;stroke-width:0.29180425">archiving</tspan><tspan
+         sodipodi:role="line"
+         x="-8.375536"
+         y="305.93454"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff34ff;fill-opacity:0.81592042;stroke-width:0.29180425"
+         id="tspan4625">as </tspan><tspan
+         sodipodi:role="line"
+         x="-8.375536"
+         y="321.49744"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff34ff;fill-opacity:0.81592042;stroke-width:0.29180425"
+         id="tspan4627">folk</tspan><tspan
+         sodipodi:role="line"
+         x="-8.375536"
+         y="337.06033"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff34ff;fill-opacity:0.81592042;stroke-width:0.29180425"
+         id="tspan4631">art</tspan><tspan
+         sodipodi:role="line"
+         x="-8.375536"
+         y="352.62323"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888903px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff34ff;fill-opacity:0.81592042;stroke-width:0.29180425"
+         id="tspan4877">RICK PRELLINGER</tspan></text>
+    <text
+       transform="matrix(0.81230641,0,0,0.79562629,-86.745923,-193.29322)"
+       id="text4645"
+       y="395.92957"
+       x="94.524132"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.45031548px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#ff34ff;fill-opacity:0.81592042;stroke:none;stroke-width:0.29180425;filter:url(#filter4728)"
+       xml:space="preserve"><tspan
+         id="tspan4643"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff34ff;fill-opacity:0.81592042;stroke-width:0.29180425"
+         y="395.92957"
+         x="94.524132"
+         sodipodi:role="line">juxtaposition</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff34ff;fill-opacity:0.81592042;stroke-width:0.29180425"
+         y="411.49246"
+         x="94.524132"
+         sodipodi:role="line"
+         id="tspan4656">of user</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff34ff;fill-opacity:0.81592042;stroke-width:0.29180425"
+         y="427.05536"
+         x="94.524132"
+         sodipodi:role="line"
+         id="tspan4658">and archivist</tspan></text>
+    <image
+       sodipodi:absref="C:\Users\nikol\Desktop\bowb nikos 20 12 2020\morehshin_allahyari-material_speculation-gorgon-1.jpg"
+       xlink:href="morehshin_allahyari-material_speculation-gorgon-1.jpg"
+       width="140.79417"
+       height="102.92053"
+       preserveAspectRatio="none"
+       id="image4767"
+       x="121.95797"
+       y="530.90594" />
+    <a
+       id="a4827"
+       xlink:href="https://www.youtube.com/watch?v=bgZ9YcZaLLk&amp;feature=emb_title&amp;ab_channel=OpenKnowledgeFoundationDeutschland"
+       target="blank"
+       transform="translate(21.897107,-44.828562)">
+      <text
+         id="text4825"
+         y="41.110176"
+         x="79.974388"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332"
+           y="41.110176"
+           x="79.974388"
+           id="tspan4823"
+           sodipodi:role="line">now:Syrian archive</tspan></text>
+    </a>
+    <a
+       id="a4853"
+       xlink:href="https://kalosklio.com/projects/on-the-tapis#&amp;gid=null&amp;pid=4"
+       target="blank"
+       transform="matrix(0.85514632,0,0,0.85514632,-132.53686,270.66457)">
+      <image
+         sodipodi:absref="C:\Users\nikol\Desktop\bowb nikos 20 12 2020\Freedom-Scores.jpg"
+         xlink:href="Freedom-Scores.jpg"
+         y="345.72501"
+         x="151.10222"
+         id="image4850"
+         preserveAspectRatio="none"
+         height="112.20271"
+         width="116.38048" />
+    </a>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.45031548px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#ff34ff;fill-opacity:0.81592042;stroke:none;stroke-width:0.29180425;filter:url(#filter4728)"
+       x="94.524132"
+       y="395.92957"
+       id="text4862"
+       transform="matrix(0.73008075,0,0,0.73735706,-98.089809,219.19171)"><tspan
+         id="tspan4860"
+         sodipodi:role="line"
+         x="94.524132"
+         y="395.92957"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#fc3400;fill-opacity:0.81592042;stroke-width:0.29180425">new archival forms,</tspan><tspan
+         sodipodi:role="line"
+         x="94.524132"
+         y="411.49246"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#fc3400;fill-opacity:0.81592042;stroke-width:0.29180425"
+         id="tspan4871">new dangers, </tspan><tspan
+         sodipodi:role="line"
+         x="94.524132"
+         y="427.05536"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#fc3400;fill-opacity:0.81592042;stroke-width:0.29180425"
+         id="tspan4875">preservation,</tspan><tspan
+         sodipodi:role="line"
+         x="94.524132"
+         y="442.61826"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#fc3400;fill-opacity:0.81592042;stroke-width:0.29180425"
+         id="tspan4913">new materiality,</tspan><tspan
+         sodipodi:role="line"
+         x="94.524132"
+         y="458.18115"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#fc3400;fill-opacity:0.81592042;stroke-width:0.29180425"
+         id="tspan4915">new versions.</tspan></text>
+    <a
+       id="a4961"
+       xlink:href="https://en.wikipedia.org/wiki/Printing_out_the_Internet"
+       target="blank"
+       transform="matrix(2.182354,0,0,2.2210455,-37.019002,-132.21128)">
+      <image
+         sodipodi:absref="C:\Users\nikol\Desktop\bowb nikos 20 12 2020\download.jpg"
+         xlink:href="download.jpg"
+         y="197.57341"
+         x="-1.1959921"
+         id="image4944"
+         preserveAspectRatio="none"
+         height="42.749107"
+         width="64.240456" />
+    </a>
+    <a
+       id="a5547"
+       xlink:href="http://threedscans.com/"
+       target="blank"
+       transform="translate(15.253358,71.259475)">
+      <image
+         sodipodi:absref="C:\Users\nikol\Desktop\bowb nikos 20 12 2020\sheep-1024x889.jpg"
+         xlink:href="sheep-1024x889.jpg"
+         y="268.59515"
+         x="189.43631"
+         id="image5536"
+         preserveAspectRatio="none"
+         height="57.187798"
+         width="65.872108" />
+    </a>
+    <a
+       id="a5543"
+       xlink:href="http://threedscans.com/"
+       target="blank"
+       transform="translate(11.851572,70.125547)">
+      <text
+         id="text5541"
+         y="334.79767"
+         x="199.79285"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.64444447px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332"
+           y="334.79767"
+           x="199.79285"
+           id="tspan5539"
+           sodipodi:role="line">Oliver Laric</tspan></text>
+    </a>
+    <a
+       id="a5561"
+       xlink:href="http://oliverlaric.com/recliningpan.html"
+       target="blank"
+       transform="matrix(2.3033346,0,0,2.3033346,-477.36146,-284.30005)">
+      <image
+         sodipodi:absref="C:\Users\nikol\Desktop\bowb nikos 20 12 2020\PanSTL.jpg"
+         xlink:href="PanSTL.jpg"
+         y="268.59515"
+         x="255.30841"
+         id="image5558"
+         preserveAspectRatio="none"
+         height="31.183044"
+         width="40.149841" />
+    </a>
+    <a
+       id="a6232"
+       xlink:href="http://ilovemouchette.virtualperson.org/"
+       target="blank"
+       transform="matrix(0.86819978,0,0,0.86819978,99.507311,66.677662)">
+      <text
+         id="text6214"
+         y="241.15401"
+         x="10.299853"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           id="tspan6212"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332"
+           y="241.15401"
+           x="10.299853"
+           sodipodi:role="line">N.Voyiatzis and Martine Neddam, I love mouchette</tspan></text>
+    </a>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.64444447px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="160.31564"
+       y="-189.39354"
+       id="text6141"><tspan
+         sodipodi:role="line"
+         id="tspan6139"
+         x="160.31564"
+         y="-184.39954"
+         style="stroke-width:0.26458332" /><tspan
+         sodipodi:role="line"
+         x="160.31564"
+         y="-175.47122"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:7.76111126px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.26458332"
+         id="tspan6143">Níkos Voyiatzís</tspan></text>
+    <text
+       id="text6149"
+       y="-181.07806"
+       x="161.07158"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.64444447px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="stroke-width:0.26458332"
+         y="-176.08406"
+         x="161.07158"
+         id="tspan6145"
+         sodipodi:role="line" /><tspan
+         id="tspan6147"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.3499999px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.26458332"
+         y="-168.40425"
+         x="161.07158"
+         sodipodi:role="line">http://thereisamajorprobleminaustralia.com/</tspan></text>
+    <image
+       sodipodi:absref="C:\Users\nikol\Desktop\bowb nikos 20 12 2020\press-1.png"
+       xlink:href="press-1.png"
+       width="131.70999"
+       height="71.45266"
+       preserveAspectRatio="none"
+       id="image6159"
+       x="162.19946"
+       y="-19.154163" />
+    <text
+       transform="matrix(0.94129294,0,0,0.69397222,-2.0946865,-257.3138)"
+       id="text6172"
+       y="290.37164"
+       x="-8.375536"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.45031548px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#ff34ff;fill-opacity:0.81592042;stroke:none;stroke-width:0.29180425;filter:url(#filter4738)"
+       xml:space="preserve"><tspan
+         id="tspan6168"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff34ff;fill-opacity:0.81592042;stroke-width:0.29180425"
+         y="290.37164"
+         x="-8.375536"
+         sodipodi:role="line">communities</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78144693px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff34ff;fill-opacity:0.81592042;stroke-width:0.29180425"
+         y="305.93454"
+         x="-8.375536"
+         sodipodi:role="line"
+         id="tspan6184">of records</tspan><tspan
+         id="tspan6170"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888903px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff34ff;fill-opacity:0.81592042;stroke-width:0.29180425"
+         y="321.49744"
+         x="-8.375536"
+         sodipodi:role="line">J. BASTIAN</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.64444447px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="250.44165"
+       y="276.4585"
+       id="text6191"><tspan
+         sodipodi:role="line"
+         id="tspan6189"
+         x="250.44165"
+         y="281.45251"
+         style="stroke-width:0.26458332" /></text>
+    <a
+       id="a5543-2"
+       xlink:href="http://threedscans.com/"
+       target="blank"
+       transform="translate(-143.27129,227.64557)">
+      <text
+         id="text5541-0"
+         y="334.41968"
+         x="194.1232"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.64444447px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332"
+           y="334.41968"
+           x="194.1232"
+           id="tspan5539-3"
+           sodipodi:role="line">Kalos and Klio</tspan></text>
+    </a>
+    <a
+       id="a991"
+       xlink:href="https://vimeo.com/148158228"
+       target="blank"
+       transform="matrix(1.0796879,0,0,1.0796879,-7.9209115,-89.204444)">
+      <image
+         sodipodi:absref="C:\Users\nikol\Desktop\bowb nikos 20 12 2020\jpeg.jpg"
+         xlink:href="jpeg.jpg"
+         width="201.6125"
+         height="113.50625"
+         preserveAspectRatio="none"
+         id="image982"
+         x="38.132427"
+         y="719.38989" />
+    </a>
+    <a
+       transform="translate(-8.2499453,343.44553)"
+       target="blank"
+       xlink:href="http://threedscans.com/"
+       id="a989">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.64444447px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="194.1232"
+         y="334.41968"
+         id="text987"><tspan
+           sodipodi:role="line"
+           id="tspan985"
+           x="194.1232"
+           y="334.41968"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332">Larisa Sansour</tspan></text>
+    </a>
+    <a
+       transform="translate(-148.56296,-32.402049)"
+       target="blank"
+       xlink:href="http://threedscans.com/"
+       id="a4701">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.64444447px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="185.05177"
+         y="441.38693"
+         id="text4699"><tspan
+           sodipodi:role="line"
+           id="tspan4697"
+           x="185.05177"
+           y="441.38693"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332">Kenneth Goldsmith</tspan></text>
+    </a>
+    <image
+       sodipodi:absref="C:\Users\nikol\Desktop\bowb nikos 20 12 2020\BOWB_TEXTILES_BRUSH_home.jpg"
+       xlink:href="BOWB_TEXTILES_BRUSH_home.jpg"
+       style="filter:url(#filter4679)"
+       width="379.37006"
+       height="59.338383"
+       preserveAspectRatio="none"
+       id="image4668"
+       x="-55.138664"
+       y="-246.44559" />
+    <image
+       sodipodi:absref="C:\Users\nikol\Desktop\bowb nikos 20 12 2020\BOWB_TEXTILES_BRUSH_home.jpg"
+       xlink:href="BOWB_TEXTILES_BRUSH_home.jpg"
+       y="939.84149"
+       x="-55.138664"
+       id="image4681"
+       preserveAspectRatio="none"
+       height="59.338383"
+       width="379.37006"
+       style="filter:url(#filter4679)" />
+  </g>
+</svg>
