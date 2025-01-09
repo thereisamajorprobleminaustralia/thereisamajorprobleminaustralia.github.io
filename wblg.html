@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three.js Scene with Wireframes, Fog, and Lighting</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // Scene setup
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0x000000, 5, 20); // Add fog (black color, near at 5, far at 20)
+
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0x404040, 2); // Soft white ambient light
+    scene.add(ambientLight);
+
+    const pointLight = new THREE.PointLight(0xffffff, 1.5, 50);
+    pointLight.position.set(5, 5, 5);
+    scene.add(pointLight);
+
+    // Audio files with preload mechanism
+    const dropSoundEffect = new Audio('drop-sound-effect-240899.mp3');
+    dropSoundEffect.preload = 'auto'; // Preload the sound file
+
+    const torusHoverSound = new Audio('drop-sound-effect-240899.mp3');
+    torusHoverSound.preload = 'auto';
+
+    const cylinderHoverSound = new Audio('birds-singing-audio-tune-165801.mp3');
+    cylinderHoverSound.preload = 'auto';
+
+    const sphereHoverSound = new Audio('rain-sound-272604.mp3');
+    sphereHoverSound.preload = 'auto';
+
+    const boxHoverSound = new Audio('atmosphere-sound-effect-239969.mp3');
+    boxHoverSound.preload = 'auto';
+
+    // Create shapes (all wireframe)
+    const torusGeometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
+    const torusMaterial = new THREE.MeshBasicMaterial({ color: 0x0077ff, wireframe: true });
+    const torus = new THREE.Mesh(torusGeometry, torusMaterial);
+    torus.name = 'torus';
+    scene.add(torus);
+
+    const cylinderGeometry = new THREE.CylinderGeometry(0.2, 0.2, 3, 32);
+    const cylinderMaterial = new THREE.MeshBasicMaterial({ color: 0xff6600, wireframe: true });
+    const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
+    cylinder.position.set(3, 0, 0);
+    cylinder.name = 'cylinder';
+    scene.add(cylinder);
+
+    const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+    const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    sphere.name = 'sphere';
+    scene.add(sphere);
+
+    const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+    const boxMaterial = new THREE.MeshBasicMaterial({ color: 0xff00ff, wireframe: true });
+    const box = new THREE.Mesh(boxGeometry, boxMaterial);
+    box.name = 'box';
+    scene.add(box);
+
+    const coneGeometry = new THREE.ConeGeometry(0.5, 1.5, 32);
+    const coneMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00, wireframe: true });
+    const cone = new THREE.Mesh(coneGeometry, coneMaterial);
+    cone.position.set(-3, 0, 0);
+    cone.name = 'cone';
+    scene.add(cone);
+
+    const dodecahedronGeometry = new THREE.DodecahedronGeometry(0.7);
+    const dodecahedronMaterial = new THREE.MeshBasicMaterial({ color: 0x00ffff, wireframe: true });
+    const dodecahedron = new THREE.Mesh(dodecahedronGeometry, dodecahedronMaterial);
+    dodecahedron.position.set(0, 3, 0);
+    dodecahedron.name = 'dodecahedron';
+    scene.add(dodecahedron);
+
+    // Set camera position
+    camera.position.z = 10; // Start farther away to allow zoom in
+
+    // Variables for animation
+    let time = 0;
+    const cylinderSpeed = 0.01;
+    const rotationSpeed = 0.005;
+
+    // Track mouse position for rotating scene
+    let mouseX = 0;
+    let mouseY = 0;
+
+    window.addEventListener('mousemove', (event) => {
+      mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+      mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+
+      // Apply rotation to the scene based on mouse movement
+      scene.rotation.x = mouseY * 0.5;
+      scene.rotation.y = mouseX * 0.5;
+
+      // Torus animation
+      torus.rotation.x += rotationSpeed;
+      torus.rotation.y += rotationSpeed;
+
+      // Cylinder animation
+      time += cylinderSpeed;
+      cylinder.position.x = Math.sin(time) * 3;
+      cylinder.position.y = Math.cos(time) * 2;
+      cylinder.rotation.z += rotationSpeed;
+
+      // Sphere animation (sine wave movement)
+      sphere.position.x = Math.sin(time * 2) * 2;
+      sphere.position.y = Math.sin(time) * 2;
+
+      // Box animation (diagonal movement)
+      box.position.x = Math.sin(time) * 3;
+      box.position.y = Math.sin(time) * 3;
+
+      // Cone animation (bouncing)
+      cone.position.y = Math.abs(Math.sin(time * 2)) * 2;
+
+      // Dodecahedron animation (circular movement)
+      dodecahedron.position.x = Math.sin(time) * 3;
+      dodecahedron.position.y = Math.cos(time) * 3;
+
+      // Render the scene
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Hover detection and sound playback
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    function onMouseMove(event) {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(scene.children);
+
+      if (intersects.length > 0) {
+        const object = intersects[0].object;
+        switch (object.name) {
+          case 'torus':
+          case 'cone':
+          case 'dodecahedron':
+            dropSoundEffect.play();
+            break;
+          case 'cylinder':
+            cylinderHoverSound.play();
+            break;
+          case 'sphere':
+            sphereHoverSound.play();
+            break;
+          case 'box':
+            boxHoverSound.play();
+            break;
+        }
+      }
+    }
+
+    window.addEventListener('mousemove', onMouseMove);
+
+    // Add zoom functionality
+    function onWheel(event) {
+      camera.position.z += event.deltaY * 0.01; // Adjust zoom speed
+      camera.position.z = Math.max(2, Math.min(camera.position.z, 50)); // Clamp zoom range
+    }
+
+    window.addEventListener('wheel', onWheel);
+
+    // Resize event listener
+    window.addEventListener('resize', () => {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    });
+  </script>
+</body>
+</html>

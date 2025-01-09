@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychedelic Mesh WebGL Animation</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #1a1a1a; }
+        canvas { display: block; }
+        .popup {
+            position: absolute;
+            background: rgba(30, 58, 138, 0.9);
+            color: #fff;
+            border-radius: 10px;
+            display: none;
+            z-index: 10;
+            width: 400px;
+            height: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .popup iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="popup" class="popup">
+    <iframe id="popupIframe" src=""></iframe>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// Set up the scene, camera, and renderer
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// Add blue lighting for a psychedelic effect
+const ambientLight = new THREE.AmbientLight(0x0000FF, 2.5);
+scene.add(ambientLight);
+const pointLight = new THREE.PointLight(0x0000FF, 11, 100);
+pointLight.position.set(10, 10, 10);
+scene.add(pointLight);
+
+// Create snake-like toruses (shapes)
+const shapes = [];
+const geometryTypes = [
+    new THREE.TorusGeometry(15, 4, 16, 100),
+    new THREE.TorusGeometry(13, 4, 16, 100),
+    new THREE.TorusGeometry(20, 3, 16, 100),
+    new THREE.TorusGeometry(18, 3, 16, 100)
+];
+
+const material = new THREE.MeshStandardMaterial({
+    color: 0x1E3A8A,  // Dark blue
+    emissive: 0x1E3A8A, // Blue glow
+    emissiveIntensity: 0.5,
+    metalness: 0.9,
+    roughness: 0.1
+});
+
+for (let i = 0; i < geometryTypes.length; i++) {
+    const mesh = new THREE.Mesh(geometryTypes[i], material);
+    mesh.position.set(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10);
+    shapes.push(mesh);
+    scene.add(mesh);
+}
+
+// Create 3 torus knots
+const knotGeometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+const knots = [];
+for (let i = 0; i < 3; i++) {
+    const knotMesh = new THREE.Mesh(knotGeometry, material);
+    knotMesh.position.set(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10);
+    knots.push(knotMesh);
+    scene.add(knotMesh);
+}
+
+// Create a floor
+const floorGeometry = new THREE.PlaneGeometry(50, 50, 10, 10);
+const floor = new THREE.Mesh(floorGeometry, material);
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -15;
+scene.add(floor);
+
+// Add smaller shapes
+const smallGeometryTypes = [
+    new THREE.SphereGeometry(2, 8, 8),
+    new THREE.ConeGeometry(2, 5, 8),
+    new THREE.TorusGeometry(2, 0.4, 16, 100)
+];
+
+const smallShapes = [];
+for (let i = 0; i < smallGeometryTypes.length; i++) {
+    const mesh = new THREE.Mesh(smallGeometryTypes[i], material);
+    mesh.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);
+    smallShapes.push(mesh);
+    scene.add(mesh);
+}
+
+// Add smaller Greek shapes
+const greekShapes = [];
+for (let i = 0; i < smallGeometryTypes.length; i++) {
+    const mesh = new THREE.Mesh(smallGeometryTypes[i], material);
+    mesh.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);
+    greekShapes.push(mesh);
+    scene.add(mesh);
+}
+
+// Camera position (start far out, will zoom in later)
+camera.position.z = 50;
+
+// Keyboard controls for zoom and rotation
+const zoomSpeed = 0.2;
+const rotateSpeed = 0.005;
+let rotateX = 0;
+let rotateY = 0;
+
+window.addEventListener('keydown', (event) => {
+    if (event.key === 'w' || event.key === 'W') {
+        camera.position.z -= zoomSpeed;
+    } else if (event.key === 's' || event.key === 'S') {
+        camera.position.z += zoomSpeed;
+    }
+
+    if (event.key === 'a' || event.key === 'A') {
+        rotateY -= rotateSpeed;
+    } else if (event.key === 'd' || event.key === 'D') {
+        rotateY += rotateSpeed;
+    }
+
+    if (event.key === 'q' || event.key === 'Q') {
+        rotateX -= rotateSpeed;
+    } else if (event.key === 'e' || event.key === 'E') {
+        rotateX += rotateSpeed;
+    }
+});
+
+// Handle popup display
+const popup = document.getElementById('popup');
+const iframe = document.getElementById('popupIframe');
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+function onMouseClick(event) {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+
+    const intersects = raycaster.intersectObjects(smallShapes);
+    if (intersects.length > 0) {
+        const intersect = intersects[0];
+        popup.style.left = `${event.clientX}px`;
+        popup.style.top = `${event.clientY}px`;
+        popup.style.display = 'block';
+        iframe.src = 'https://example.com'; // Set the iframe source
+
+        setTimeout(() => {
+            popup.style.display = 'none';
+            iframe.src = '';
+        }, 5000); // Close popup after 5 seconds
+    }
+}
+
+window.addEventListener('click', onMouseClick);
+
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+
+    // Rotate the camera
+    camera.rotation.x = rotateX;
+    camera.rotation.y = rotateY;
+
+    // Rotate and move the shapes
+    shapes.forEach((shape) => {
+        shape.rotation.x += 0.005;
+        shape.rotation.y += 0.005;
+    });
+
+    knots.forEach((knot) => {
+        knot.rotation.x += 0.005;
+        knot.rotation.y += 0.005;
+    });
+
+    smallShapes.forEach((shape) => {
+        shape.rotation.x += 0.01;
+        shape.rotation.y += 0.01;
+    });
+
+    greekShapes.forEach((shape) => {
+        shape.rotation.x += 0.01;
+        shape.rotation.y += 0.01;
+    });
+
+    // Render the scene
+    renderer.render(scene, camera);
+}
+
+animate();
+
+// Resize the window
+window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+});
+</script>
+</body>
+</html>
