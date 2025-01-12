@@ -51,6 +51,17 @@
             color: #ff00ff;
             text-shadow: 0 0 10px #ff00ff;
         }
+
+        .title-bar {
+            padding: 15px;
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px 10px 0 0;
+        }
     </style>
 </head>
 <body>
@@ -126,6 +137,18 @@
         const group = new THREE.Group();
         scene.add(group);
 
+        // Define content for each shape
+        const shapeContent = [
+            { name: 'Torus Portal', content: 'Experience the infinite loop' },
+            { name: 'Cube Dimension', content: 'Enter the cubic realm' },
+            { name: 'Sphere of Harmony', content: 'Find perfect balance' },
+            { name: 'Cone of Creation', content: 'Rise to new heights' },
+            { name: 'Knot of Infinity', content: 'Unravel the complexity' },
+            { name: 'Dodecahedron Dreams', content: 'Explore twelve faces of reality' },
+            { name: 'Icosahedron Insights', content: 'Twenty triangles of truth' },
+            { name: 'Octahedron Oracle', content: 'Eight faces of wisdom' }
+        ];
+
         // Create psychedelic materials
         const objects = geometries.map((geometry, index) => {
             const material = new THREE.MeshPhysicalMaterial({
@@ -145,7 +168,7 @@
             mesh.position.y = Math.sin(angle) * radius;
             mesh.position.z = Math.random() * 4 - 2;
             
-            mesh.userData.url = `artysub.html?shape=${index + 1}`;
+            mesh.userData.shapeInfo = shapeContent[index];
             group.add(mesh);
             return mesh;
         });
@@ -186,6 +209,45 @@
         const raycaster = new THREE.Raycaster();
         const mouse = new THREE.Vector2();
 
+        function createIframeContent(shapeInfo) {
+            return `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <style>
+                        body {
+                            margin: 0;
+                            padding: 20px;
+                            background: linear-gradient(45deg, #000000, #1a1a1a);
+                            color: white;
+                            font-family: Arial, sans-serif;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            height: 100vh;
+                            text-align: center;
+                        }
+                        h1 {
+                            font-size: 2.5em;
+                            margin-bottom: 20px;
+                            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+                        }
+                        p {
+                            font-size: 1.5em;
+                            max-width: 600px;
+                            line-height: 1.6;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>${shapeInfo.name}</h1>
+                    <p>${shapeInfo.content}</p>
+                </body>
+                </html>
+            `;
+        }
+
         function onMouseClick(event) {
             mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -194,26 +256,35 @@
             const intersects = raycaster.intersectObjects(objects);
 
             if (intersects.length > 0) {
-                const url = intersects[0].object.userData.url;
-                if (url) {
-                    const container = document.createElement('div');
-                    container.classList.add('iframe-container');
+                const object = intersects[0].object;
+                const shapeInfo = object.userData.shapeInfo;
+                
+                const container = document.createElement('div');
+                container.classList.add('iframe-container');
 
-                    const closeButton = document.createElement('button');
-                    closeButton.classList.add('close-button');
-                    closeButton.innerText = '×';
+                const closeButton = document.createElement('button');
+                closeButton.classList.add('close-button');
+                closeButton.innerText = '×';
 
-                    const iframe = document.createElement('iframe');
-                    iframe.src = url;
+                const titleBar = document.createElement('div');
+                titleBar.classList.add('title-bar');
+                titleBar.innerText = shapeInfo.name;
 
-                    closeButton.addEventListener('click', () => {
-                        document.body.removeChild(container);
-                    });
+                const iframe = document.createElement('iframe');
+                
+                // Create a blob URL for the iframe content
+                const blob = new Blob([createIframeContent(shapeInfo)], { type: 'text/html' });
+                iframe.src = URL.createObjectURL(blob);
 
-                    container.appendChild(closeButton);
-                    container.appendChild(iframe);
-                    document.body.appendChild(container);
-                }
+                closeButton.addEventListener('click', () => {
+                    URL.revokeObjectURL(iframe.src);
+                    document.body.removeChild(container);
+                });
+
+                container.appendChild(closeButton);
+                container.appendChild(titleBar);
+                container.appendChild(iframe);
+                document.body.appendChild(container);
             }
         }
 
