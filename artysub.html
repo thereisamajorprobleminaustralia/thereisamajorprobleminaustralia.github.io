@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychedelic Subpage</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            opacity: 0.1;
+            animation: backgroundShift 10s infinite linear;
+        }
+
+        @keyframes backgroundShift {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            color: white;
+            font-size: 40px;
+            border: none;
+            cursor: pointer;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .close-btn:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 20px #ff00ff;
+            transform: rotate(90deg);
+        }
+
+        .content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            animation: contentGlow 4s infinite alternate;
+        }
+
+        @keyframes contentGlow {
+            0% { text-shadow: 0 0 10px rgba(255, 0, 255, 0.5); }
+            100% { text-shadow: 0 0 20px rgba(0, 255, 255, 0.8); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleShift 5s infinite linear;
+        }
+
+        @keyframes titleShift {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        p {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 10s infinite linear;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="particles" id="particles"></div>
+    <button class="close-btn" onclick="closeIframe()">×</button>
+    <div class="content">
+        <h1>Psychedelic Journey</h1>
+        <p>Welcome to a dimension of infinite possibilities...</p>
+    </div>
+
+    <script>
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 4 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.opacity = Math.random() * 0.5;
+            particle.style.animation = `float ${Math.random() * 20 + 10}s infinite linear`;
+            particlesContainer.appendChild(particle);
+        }
+
+        // Add random movement to particles
+        const style = document.createElement('style');
+        document.head.appendChild(style);
+        const styleSheet = style.sheet;
+        
+        for (let i = 0; i < 50; i++) {
+            const keyframes = `
+                @keyframes float${i} {
+                    0% { transform: translate(0, 0); }
+                    25% { transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px); }
+                    50% { transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px); }
+                    75% { transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px); }
+                    100% { transform: translate(0, 0); }
+                }
+            `;
+            styleSheet.insertRule(keyframes, i);
+            document.querySelectorAll('.particle')[i].style.animation = `float${i} ${Math.random() * 20 + 10}s infinite ease-in-out`;
+        }
+
+        function closeIframe() {
+            window.parent.postMessage('close', '*');
+        }
+    </script>
+</body>
+</html>
