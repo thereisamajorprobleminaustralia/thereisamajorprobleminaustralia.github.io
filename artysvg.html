@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .svg-container {
+      width: 100%;
+      height: 100vh;
+      background: #1a237e;
+    }
+    svg {
+      cursor: move;
+      width: 100%;
+      height: 100%;
+    }
+    /* Add hover effects for interactive elements */
+    .hoverable {
+      transition: opacity 0.3s;
+    }
+    .hoverable:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Audio elements -->
+  <audio id="sound1" src="atmosphere-sound-effect-239969.MP3" preload="auto"></audio>
+  <audio id="sound2" src="2.mp3" preload="auto"></audio>
+  <audio id="sound3" src="3.mp3" preload="auto"></audio>
+  <audio id="sound4" src="4.mp3" preload="auto"></audio>
+
+  <div class="svg-container">
+    <svg id="zoomable" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+      <g id="zoomable-content">
+        <!-- Stars -->
+        <g fill="white" opacity="0.6">
+          <circle cx="50" cy="30" r="1"/>
+          <circle cx="150" cy="40" r="1"/>
+          <circle cx="250" cy="20" r="1"/>
+          <circle cx="350" cy="45" r="1"/>
+          <circle cx="100" cy="60" r="1"/>
+          <circle cx="300" cy="25" r="1"/>
+        </g>
+
+        <!-- Sun - Sound 1 -->
+        <g class="hoverable" data-sound="sound1">
+          <circle cx="320" cy="50" r="30" fill="#ff9800"/>
+          <circle cx="320" cy="50" r="25" fill="#ffd700"/>
+        </g>
+        
+        <!-- Two Moons - Sound 2 -->
+        <g class="hoverable" data-sound="sound2">
+          <!-- First Moon -->
+          <circle cx="80" cy="60" r="20" fill="#eceff1"/>
+          <circle cx="75" cy="55" r="5" fill="#cfd8dc"/>
+          <circle cx="90" cy="70" r="4" fill="#cfd8dc"/>
+          
+          <!-- Second Moon -->
+          <circle cx="200" cy="40" r="15" fill="#b0bec5"/>
+          <circle cx="195" cy="35" r="4" fill="#90a4ae"/>
+          <circle cx="208" cy="45" r="3" fill="#90a4ae"/>
+        </g>
+        
+        <!-- Tree - Sound 3 -->
+        <g class="hoverable" data-sound="sound3">
+          <!-- Trunk -->
+          <path d="M180 280 L200 160 L220 280" fill="#5d4037"/>
+          
+          <!-- Tree Crown -->
+          <path d="M120 200 C150 150, 200 100, 280 200" fill="#2e7d32"/>
+          <path d="M100 160 C150 110, 200 60, 300 160" fill="#388e3c"/>
+          <path d="M140 120 C170 80, 200 40, 260 120" fill="#43a047"/>
+        </g>
+        
+        <!-- Birds - Sound 4 -->
+        <g class="hoverable" data-sound="sound4">
+          <!-- First Bird -->
+          <path d="M120 100 C130 90, 140 90, 150 100 C140 95, 130 95, 120 100" fill="#212121"/>
+          
+          <!-- Second Bird -->
+          <path d="M280 80 C290 70, 300 70, 310 80 C300 75, 290 75, 280 80" fill="#212121"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <script>
+    const svg = document.querySelector('#zoomable');
+    const content = document.querySelector('#zoomable-content');
+    let viewBox = { x: 0, y: 0, w: 400, h: 300 };
+    let isPanning = false;
+    let startPoint = { x: 0, y: 0 };
+    let endPoint = { x: 0, y: 0 };
+
+    // Sound handling
+    const hoverables = document.querySelectorAll('.hoverable');
+    hoverables.forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        const soundId = element.getAttribute('data-sound');
+        const audio = document.getElementById(soundId);
+        if (audio) {
+          audio.currentTime = 0; // Reset sound to start
+          audio.play();
+        }
+      });
+    });
+
+    // Handle mouse wheel for zooming
+    svg.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const w = viewBox.w;
+      const h = viewBox.h;
+      const mx = e.offsetX;
+      const my = e.offsetY;
+      const dw = w * Math.sign(e.deltaY) * 0.1;
+      const dh = h * Math.sign(e.deltaY) * 0.1;
+      const dx = (dw * mx) / svg.clientWidth;
+      const dy = (dh * my) / svg.clientHeight;
+      
+      // Limit minimum zoom
+      if (viewBox.w - dw >= 50 && viewBox.h - dh >= 50) {
+        viewBox = {
+          x: viewBox.x + dx,
+          y: viewBox.y + dy,
+          w: viewBox.w - dw,
+          h: viewBox.h - dh
+        };
+
+        svg.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
+      }
+    });
+
+    // Handle mouse events for panning
+    svg.addEventListener('mousedown', (e) => {
+      isPanning = true;
+      startPoint = { x: e.x, y: e.y };
+    });
+
+    svg.addEventListener('mousemove', (e) => {
+      if (isPanning) {
+        endPoint = { x: e.x, y: e.y };
+        const dx = (endPoint.x - startPoint.x) * viewBox.w / svg.clientWidth;
+        const dy = (endPoint.y - startPoint.y) * viewBox.h / svg.clientHeight;
+        
+        viewBox = {
+          x: viewBox.x - dx,
+          y: viewBox.y - dy,
+          w: viewBox.w,
+          h: viewBox.h
+        };
+
+        svg.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
+        startPoint = endPoint;
+      }
+    });
+
+    svg.addEventListener('mouseup', () => {
+      isPanning = false;
+    });
+
+    svg.addEventListener('mouseleave', () => {
+      isPanning = false;
+    });
+  </script>
+</body>
+</html>
