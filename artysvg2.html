@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pan, Zoom, and Hover Sound</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #003366;
+    }
+    #svg-container {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      cursor: grab;
+    }
+    svg {
+      width: 1600px; /* Initial width for zoom */
+      height: 1200px; /* Initial height for zoom */
+      transform-origin: center center;
+      transition: transform 0.3s ease; /* Smooth zoom */
+    }
+  </style>
+</head>
+<body>
+  <div id="svg-container">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" id="scene">
+      <!-- Background -->
+      <rect width="800" height="600" fill="#003366"/>
+
+      <!-- Moons -->
+      <circle cx="650" cy="100" r="50" fill="#0066cc" class="sound-hover"/>
+      <circle cx="150" cy="80" r="40" fill="#0055aa" class="sound-hover"/>
+
+      <!-- Trees -->
+      <polygon points="100,400 50,500 150,500" fill="#004c99" class="sound-hover"/>
+      <polygon points="200,350 150,500 250,500" fill="#004c99" class="sound-hover"/>
+      <polygon points="300,450 250,500 350,500" fill="#004c99" class="sound-hover"/>
+      <polygon points="400,300 350,500 450,500" fill="#004c99" class="sound-hover"/>
+      <polygon points="500,380 450,500 550,500" fill="#004c99" class="sound-hover"/>
+      <polygon points="600,320 550,500 650,500" fill="#004c99" class="sound-hover"/>
+
+      <!-- Tree Trunks -->
+      <rect x="90" y="500" width="20" height="50" fill="#003366" class="sound-hover"/>
+      <rect x="190" y="500" width="20" height="50" fill="#003366" class="sound-hover"/>
+      <rect x="290" y="500" width="20" height="50" fill="#003366" class="sound-hover"/>
+      <rect x="390" y="500" width="20" height="50" fill="#003366" class="sound-hover"/>
+      <rect x="490" y="500" width="20" height="50" fill="#003366" class="sound-hover"/>
+      <rect x="590" y="500" width="20" height="50" fill="#003366" class="sound-hover"/>
+
+      <!-- Fires -->
+      <polygon points="120,550 100,580 140,580" fill="#ff6600" class="sound-hover"/>
+      <polygon points="220,540 200,570 240,570" fill="#ff6600" class="sound-hover"/>
+      <polygon points="320,560 300,590 340,590" fill="#ff6600" class="sound-hover"/>
+      <polygon points="420,550 400,580 440,580" fill="#ff6600" class="sound-hover"/>
+      <polygon points="520,540 500,570 540,570" fill="#ff6600" class="sound-hover"/>
+
+      <!-- People -->
+      <circle cx="120" cy="590" r="8" fill="#99ccff" class="sound-hover"/>
+      <circle cx="220" cy="580" r="8" fill="#99ccff" class="sound-hover"/>
+      <circle cx="320" cy="600" r="8" fill="#99ccff" class="sound-hover"/>
+      <circle cx="420" cy="590" r="8" fill="#99ccff" class="sound-hover"/>
+      <circle cx="520" cy="580" r="8" fill="#99ccff" class="sound-hover"/>
+
+      <!-- Birds -->
+      <path d="M500 200 Q520 180 540 200 Q560 180 580 200" fill="none" stroke="#0066cc" stroke-width="2" class="sound-hover"/>
+      <path d="M600 250 Q620 230 640 250 Q660 230 680 250" fill="none" stroke="#0066cc" stroke-width="2" class="sound-hover"/>
+    </svg>
+  </div>
+  <script>
+    const svgContainer = document.getElementById('svg-container');
+    const svgScene = document.getElementById('scene');
+    let isPanning = false;
+    let startX = 0, startY = 0;
+    let offsetX = -400, offsetY = -300; // Increased offset for more zoomed-in effect
+    let scale = 0.8; // Zoom out more for a smaller initial view
+
+    // Apply initial zoom and position
+    svgScene.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+
+    // Sound setup
+    const sound = new Audio('dutch.wav');
+
+    // Attach hover sound to all objects with the 'sound-hover' class
+    document.querySelectorAll('.sound-hover').forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        sound.currentTime = 0; // Restart sound
+        sound.play();
+      });
+    });
+
+    // Start panning
+    svgContainer.addEventListener('mousedown', (e) => {
+      isPanning = true;
+      startX = e.clientX - offsetX;
+      startY = e.clientY - offsetY;
+      svgContainer.style.cursor = 'grabbing';
+    });
+
+    // Stop panning
+    window.addEventListener('mouseup', () => {
+      isPanning = false;
+      svgContainer.style.cursor = 'grab';
+    });
+
+    // Pan the SVG
+    window.addEventListener('mousemove', (e) => {
+      if (!isPanning) return;
+      offsetX = e.clientX - startX;
+      offsetY = e.clientY - startY;
+      svgScene.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+    });
+
+    // Zoom in and out
+    svgContainer.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      scale += e.deltaY * -0.001;
+      scale = Math.min(Math.max(0.5, scale), 3); // Limit zoom level
+      svgScene.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+    });
+  </script>
+</body>
+</html>
