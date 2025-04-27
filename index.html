@@ -98,10 +98,11 @@
       border: none;
     }
 
+    /* Modified close button style */
     #iframe-container .close-btn {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      bottom: 10px;
+      left: 10px;
       background: #fff;
       border: none;
       color: #000;
@@ -109,6 +110,7 @@
       cursor: pointer;
       border-radius: 5px;
       font-size: 14px;
+      z-index: 1001; /* Ensure it's above the iframe */
     }
 
     #iframe-container .close-btn:hover {
@@ -234,9 +236,8 @@
  <div class="box news" data-iframe="https://about.mouchette.org/visions-of-mouchette-org/"><a href="#">Documenting user generated responses in mouchette.org</a></div>
  <div class="box news" data-iframe="https://archive.org/details/undocumented-events-and-object-permanence"><a href="#">Undocumented events and object permanence</a></div>
   <div class="box news" data-iframe="nnuj.html"><a href="#">browser based visuals key navig</a></div>
-  <div class="box news" data-iframe="arty.html"><a href="#">test psy interf</a></div>
-  <div class="box news" data-iframe="artysvg.html"><a href="#">test svg sound</a></div>
-  <div class="box news" data-iframe="artysvg2.html"><a href="#">test svg sound2</a></div>
+  <div class="box news" data-iframe="arty.html"><a href="#">test acid interface</a></div>
+ 
 
    
  <!-- Projects -->
@@ -298,7 +299,7 @@
 <div class="box workshops" data-iframe=" "><a href="#">Hybrid cities, OCC</a></div>
 <div class="box workshops" data-iframe=" "><a href="#">Art, archives and networks, OCC</a></div>
 <div class="box workshops" data-iframe=" "><a href="#">Appropriating cultural heritage items, HAEF</a></div>
-<div class="box workshops" data-iframe= https://archive2alive.eu/"><a href="#"> Archive to Alive, IDEC</a></div>
+<div class="box workshops" data-iframe= "https://archive2alive.eu/"><a href="#"> Archive to Alive, IDEC</a></div>
 <div class="box workshops" data-iframe=""><a href="#"> Digital competencies and adult learners,IDEC</a></div>
 <div class="box workshops" data-iframe="https://www.asseffebi.eu/project/cult-tips/?lang=en"><a href="#">Cult tips: innovative teaching practices, IDEC</a></div>
 <div class="box workshops" data-iframe="https://e-trainingcentre.gr/course/index.php?categoryid=22"><a href="#">Computational thinking, guide for educators, IDEC</a></div>
@@ -313,7 +314,7 @@
  <div class="box exhibitions" data-iframe="https://sharethisart-blog.tumblr.com/"><a href="#">Share this, art and social networks</a></div>
 <div class="box exhibitions" data-iframe=" "><a href="#">404 pages</a></div>
 <div class="box exhibitions" data-iframe="avposthuman.html"><a href="#">Audiovisual Posthumanism </a></div>
-<div class="box exhibitions" data-iframe="afro.html "><a href="#">“Afronaut(a) Film Festival</a></div>
+<div class="box exhibitions" data-iframe="afro.html "><a href="#">"Afronaut(a) Film Festival</a></div>
 <div class="box exhibitions" data-iframe="https://about.mouchette.org/reboot/"><a href="#">Reboot: pioneering digital art</a></div>
 <div class="box exhibitions" data-iframe="lecturenikosdatasets.pdf"><a href="#">From lists to datasets</a></div>
 <div class="box exhibitions" data-iframe="muffin.html"><a href="#">Chihuahua or muffin- how to confuse machine learning. Guided tour</a></div>
@@ -327,8 +328,9 @@
 </a></div>  </div>
 
   <div id="iframe-container">
-    <button class="close-btn">&#x2716;</button>
     <iframe src="" frameborder="0"></iframe>
+    <!-- Close button moved to bottom left -->
+    <button class="close-btn">&#x2716;</button>
   </div>
 
   <script>
@@ -478,7 +480,9 @@
     function getRandomImage() {
       const randomIndex = Math.floor(Math.random() * images.length);
       const imageElement = document.getElementById('random-image');
-      imageElement.src = images[randomIndex];
+      if (imageElement) {
+        imageElement.src = images[randomIndex];
+      }
     }
 
     setInterval(getRandomImage, 5000);
