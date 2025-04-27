@@ -3,402 +3,726 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, minimum-scale=1.0, user-scalable=no">
-  <title>Nikos Voyiatzis - Archive</title>
+  <title>Nikos Voyiatzis - Radical Archive</title>
   <style>
-    body {
-      font-family: 'Courier New', Courier, monospace;
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+    
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Space Mono', monospace;
       background: #000;
-      overflow: hidden;
       color: #fff;
+      overflow: hidden;
+      cursor: crosshair;
       touch-action: none;
     }
-
+    
+    #noise-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJub2lzZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bU9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giIHJlc3VsdD0ibm9pc2UiLz48ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9Im5vaXNlIiBpbj0ic291cmNlR3JhcGhpYyIgcmVzdWx0PSJub2lzZUNvbXBvc2l0ZSIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=');
+      pointer-events: none;
+      opacity: 0.15;
+      z-index: 9999;
+    }
+    
     #zoom-container {
       transform-origin: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
       position: relative;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
     }
-
+    
     .box {
-      width: 150px;
-      height: 100px;
-      padding: 10px;
-      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5);
-      border-radius: 10px;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background: #000;
-      animation: drift 6s infinite ease-in-out, glow 3s infinite alternate ease-in-out;
-      cursor: grab;
+      width: 180px;
+      height: 120px;
       position: absolute;
-      border: 2px solid #fff;
-      z-index: 1;
-      touch-action: none;
+      background: #000;
+      color: #fff;
+      border: 1px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: crosshair;
+      overflow: hidden;
+      font-size: 14px;
+      padding: 10px;
       user-select: none;
-      -webkit-user-select: none;
+      touch-action: none;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0);
+      z-index: 1;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     }
-
+    
+    .box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 0%, #fff 50%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+    
     .box.active {
       z-index: 1000;
-      cursor: grabbing;
+      transform: scale(1.1);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
     }
-
+    
+    .box:hover {
+      transform: scale(1.05) skew(-2deg, 2deg);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+      border-width: 2px;
+      clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+    }
+    
+    .box:hover::before {
+      opacity: 0.1;
+    }
+    
+    .box:nth-child(odd):hover {
+      transform: scale(1.05) skew(2deg, -2deg);
+      clip-path: polygon(0% 0%, 95% 0%, 100% 100%, 5% 100%);
+    }
+    
     .box a {
       color: #fff;
       text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      display: block;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-
-    .box:hover {
-      transform: scale(1.2) rotate(5deg);
-      box-shadow: 0 12px 40px rgba(255, 255, 255, 1);
-      background: #222;
-    }
-
-    @keyframes drift {
-      0%, 100% {
-        transform: translateY(0) rotate(0deg);
-      }
-    }
-
-    @keyframes glow {
-      0% {
-        box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5);
-      }
-      100% {
-        box-shadow: 0 16px 40px rgba(255, 255, 255, 0.8);
-      }
-    }
-
+    
     #iframe-container {
       display: none;
       position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.97);
+      z-index: 2000;
+      animation: glitch 0.3s ease forwards;
+    }
+    
+    @keyframes glitch {
+      0% { clip-path: inset(0 0 100% 0); }
+      25% { clip-path: inset(0 0 75% 0); }
+      50% { clip-path: inset(0 0 50% 0); }
+      75% { clip-path: inset(0 0 25% 0); }
+      100% { clip-path: inset(0 0 0 0); }
+    }
+    
+    #iframe-container iframe {
+      width: 92%;
+      height: 92%;
+      border: 2px solid #fff;
+      position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 80%;
-      height: 80%;
-      background: rgba(0, 0, 0, 0.9);
-      border: 2px solid #ff00ff;
-      z-index: 1000;
-      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 0, 255, 1);
+      box-shadow: 0 0 60px rgba(255, 255, 255, 0.15);
     }
-
-    #iframe-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* Modified close button style */
+    
     #iframe-container .close-btn {
       position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background: #fff;
-      border: none;
-      color: #000;
-      padding: 10px 15px;
+      bottom: 20px;
+      left: 20px;
+      background: #000;
+      color: #fff;
+      border: 1px solid #fff;
+      font-family: 'Space Mono', monospace;
+      padding: 10px 20px;
+      font-size: 16px;
       cursor: pointer;
-      border-radius: 5px;
-      font-size: 14px;
-      z-index: 1001; /* Ensure it's above the iframe */
+      z-index: 2001;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
     }
-
+    
     #iframe-container .close-btn:hover {
-      background: #ddd;
+      background: #fff;
+      color: #000;
+      transform: scale(1.05);
     }
-
+    
     #categories {
       position: fixed;
-      top: 10px;
-      left: 10px;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 10px;
-      border-radius: 5px;
-      z-index: 2000;
+      top: 20px;
+      left: 20px;
+      z-index: 3000;
       display: flex;
-      gap: 10px;
       flex-direction: column;
+      gap: 8px;
     }
-
+    
     .category {
       color: #fff;
-      background: #444;
-      padding: 5px 10px;
+      background: #000;
       border: 1px solid #fff;
-      border-radius: 5px;
+      padding: 8px 15px;
       cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
     }
-
-    .category:hover {
-      background: #666;
+    
+    .category:hover, .category.active {
+      background: #fff;
+      color: #000;
     }
-
+    
+    .category::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: left 0.3s ease;
+    }
+    
+    .category:hover::after {
+      left: 100%;
+    }
+    
     #zoom-controls {
       position: fixed;
-      top: 70px;
-      left: 180px;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 10px;
-      border-radius: 5px;
-      z-index: 2000;
+      bottom: 20px;
+      right: 20px;
+      z-index: 3000;
       display: flex;
       gap: 10px;
     }
-
+    
     .zoom-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
       color: #fff;
-      background: #444;
-      padding: 10px 15px;
       border: 1px solid #fff;
-      border-radius: 5px;
+      font-size: 20px;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
-
+    
     .zoom-btn:hover {
-      background: #666;
+      background: #fff;
+      color: #000;
     }
-
+    
+    #cursor-trail {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9000;
+    }
+    
+    .cursor-dot {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #fff;
+      border-radius: 50%;
+      opacity: 0.5;
+      transition: transform 0.1s linear;
+    }
+    
+    #title {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #fff;
+      z-index: 2000;
+      mix-blend-mode: difference;
+    }
+    
+    #date {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #fff;
+      z-index: 2000;
+      opacity: 0.5;
+    }
+    
+    .glitch-text {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.8;
+    }
+    
+    .glitch-text::before {
+      left: 2px;
+      text-shadow: -1px 0 #fff;
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim-1 5s infinite linear alternate-reverse;
+    }
+    
+    .glitch-text::after {
+      left: -2px;
+      text-shadow: -1px 0 #fff;
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim-2 5s infinite linear alternate-reverse;
+    }
+    
+    @keyframes glitch-anim-1 {
+      0% { clip: rect(40px, 450px, 44px, 0); }
+      20% { clip: rect(65px, 450px, 78px, 0); }
+      40% { clip: rect(94px, 450px, 98px, 0); }
+      60% { clip: rect(58px, 450px, 72px, 0); }
+      80% { clip: rect(29px, 450px, 39px, 0); }
+      100% { clip: rect(87px, 450px, 95px, 0); }
+    }
+    
+    @keyframes glitch-anim-2 {
+      0% { clip: rect(8px, 450px, 13px, 0); }
+      20% { clip: rect(43px, 450px, 56px, 0); }
+      40% { clip: rect(28px, 450px, 36px, 0); }
+      60% { clip: rect(81px, 450px, 91px, 0); }
+      80% { clip: rect(64px, 450px, 77px, 0); }
+      100% { clip: rect(15px, 450px, 27px, 0); }
+    }
+    
+    #info-popup {
+      position: fixed;
+      bottom: 60px;
+      right: 20px;
+      background: #000;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 12px;
+      max-width: 300px;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 3000;
+    }
+    
     @media (max-width: 768px) {
       .box {
-        width: 120px;
-        height: 80px;
-        animation: none;
-        font-size: 14px;
-      }
-
-      #iframe-container {
-        width: 90%;
-        height: 90%;
-      }
-
-      #categories {
-        flex-direction: column;
-        max-width: 80px;
-      }
-
-      .category {
-        padding: 8px;
+        width: 150px;
+        height: 100px;
         font-size: 12px;
       }
-
-      #zoom-controls {
-        left: auto;
+      
+      #categories {
+        top: 10px;
+        left: 10px;
+      }
+      
+      .category {
+        padding: 6px 10px;
+        font-size: 10px;
+      }
+      
+      #title {
+        font-size: 10px;
         right: 10px;
         top: 10px;
       }
-
+      
+      #date {
+        font-size: 10px;
+        left: 10px;
+        bottom: 10px;
+      }
+      
+      #zoom-controls {
+        bottom: 10px;
+        right: 10px;
+      }
+      
       .zoom-btn {
-        padding: 8px 12px;
-        font-size: 16px;
+        width: 35px;
+        height: 35px;
       }
     }
   </style>
 </head>
 <body>
-
+  <div id="noise-overlay"></div>
+  
+  <div id="title">
+    <span class="glitch-text" data-text="NIKOS VOYIATZIS">NIKOS VOYIATZIS</span>
+  </div>
+  
+  <div id="date">ARCHIVE INTERFACE / <span id="current-datetime"></span></div>
+  
   <div id="categories">
-    <div class="category" data-category="all">All</div>
-    <div class="category" data-category="news">News</div>
-    <div class="category" data-category="projects">Projects</div>
-    <div class="category" data-category="texts">Texts</div>
-    <div class="category" data-category="archives">Archives</div>
-    <div class="category" data-category="workshops">Workshops</div>
-    <div class="category" data-category="exhibitions">Public</div>
-    <div class="category" data-category="who">Who</div>
-
- 
+    <div class="category" data-category="all">ALL WORKS</div>
+    <div class="category" data-category="news">NEWS</div>
+    <div class="category" data-category="projects">PROJECTS</div>
+    <div class="category" data-category="texts">TEXTS</div>
+    <div class="category" data-category="archives">ARCHIVES</div>
+    <div class="category" data-category="workshops">WORKSHOPS</div>
+    <div class="category" data-category="exhibitions">PUBLIC</div>
+    <div class="category" data-category="who">WHO</div>
   </div>
-
+  
   <div id="zoom-controls">
-    <button class="zoom-btn" id="zoom-in">+</button>
-    <button class="zoom-btn" id="zoom-out">-</button>
+    <div class="zoom-btn" id="zoom-in">+</div>
+    <div class="zoom-btn" id="zoom-out">-</div>
+    <div class="zoom-btn" id="zoom-reset">&#8634;</div>
   </div>
-
+  
+  <div id="info-popup">Click and drag boxes to move them. Click on a box to view its content.</div>
+  
   <div id="zoom-container">
-    <!-- Your existing boxes... -->
- 
- <!-- bio -->
- <div class="box who" data-iframe="bio.html"><a href="#">Bio</a></div>
- <div class="box who" data-iframe="photos.html"><a href="#">Photos</a></div>
-
- <!-- News -->
- <div class="box news" data-iframe="https://artbase.rhizome.org/wiki/Q15312"><a href="#">Rhizome artbase</a></div>
- <div class="box news" data-iframe="https://about.mouchette.org/visions-of-mouchette-org/"><a href="#">Documenting user generated responses in mouchette.org</a></div>
- <div class="box news" data-iframe="https://archive.org/details/undocumented-events-and-object-permanence"><a href="#">Undocumented events and object permanence</a></div>
-  <div class="box news" data-iframe="nnuj.html"><a href="#">browser based visuals key navig</a></div>
-  <div class="box news" data-iframe="arty.html"><a href="#">test acid interface</a></div>
- 
-
+    <!-- bio -->
+    <div class="box who" data-iframe="bio.html"><a href="#">Bio</a></div>
+  
+    <!-- News -->
+    <div class="box news" data-iframe="https://artbase.rhizome.org/wiki/Q15312"><a href="#">Rhizome artbase</a></div>
+    <div class="box news" data-iframe="https://about.mouchette.org/visions-of-mouchette-org/"><a href="#">Documenting user generated responses in mouchette.org</a></div>
+    <div class="box news" data-iframe="https://archive.org/details/undocumented-events-and-object-permanence"><a href="#">Undocumented events and object permanence</a></div>
+    <div class="box news" data-iframe="nnuj.html"><a href="#">browser based visuals key navig</a></div>
+    <div class="box news" data-iframe="arty.html"><a href="#">test acid interface</a></div>
    
- <!-- Projects -->
- <div class="box projects" data-iframe="https://hypersubjectivespaces.tumblr.com/"><a href="#">Hypersubjective spaces</a></div>
- <div class="box projects" data-iframe="liquid.html"><a href="#">Liquid archiving </a></div>
-
- <div class="box projects" data-iframe="MM.html"><a href="#">VJ animations browser based</a></div>
-  <div class="box projects" data-iframe="wblg.html"><a href="#">webgl with sounds</a></div>
-  <div class="box projects" data-iframe="gifs.html"><a href="#">gifs</a></div>
-  <div class="box projects" data-iframe="3.mp4"><a href="#">waiting to get classified</a></div>
-  <div class="box projects" data-iframe="1.mp4"><a href="#">the plan</a></div>
-
- <div class="box projects" data-iframe="boilerroomforgot.html"><a href="#">Boiler room forgot</a></div>
- <div class="box projects" data-iframe="https://bowb.org/apii-artist-community-synergy-nikos-voyiatzis-antigoni-cheilari-cultural-association-pera-melana/"><a href="#">On Plants and Hands, documenting ethnobotanical knowledge  </a></div>
- <div class="box projects" data-iframe="https://about.mouchette.org/nikos-fixes/"><a href="#">Preservation interface for mouchette.org</a></div>
- <div class="box projects" data-iframe="https://bitcoingarden.tumblr.com/"><a href="#">Bitcoin garden</a></div>
- <div class="box projects" data-iframe="https://ilu.servus.at/category/06-facebook-reactions.html"><a href="#">Remixing FB reactions</a></div>
- <div class="box projects" data-iframe="CAMERASINBOILERROOM.html"><a href="#">Cameras in boiler room  </a></div>
- <div class="box projects" data-iframe="https://www.discogs.com/ja/release/5546621-thereisamajorprobleminaustralia-cyborgjungle?srsltid=AfmBOor-6iu1NJalSZ2wOxWRr5pH2tcncd4JxAR16FFJWNaggz6Vsvc0"><a href="#">Cyborgjungle</a></div>
- <div class="box projects" data-iframe="agirl.html"><a href="#">a girl</a></div>
- 
- <div class="box projects" data-iframe="thethinker.html"><a href="#">thinker</a></div>
- <!-- Texts -->
- <div class="box texts" data-iframe="https://about.mouchette.org/archived-by-nikos/"><a href="#">((DAMN SITE MOUCHETTE!))</a></div>
- <div class="box texts" data-iframe="https://networkcultures.org/longform/2015/11/06/the-effect-of-the-list/"><a href="#">The effect of the list</a></div>
- <div class="box texts" data-iframe="https://networkcultures.org/blog/publication/lets-get-physical-a-sample-of-inc-longforms-2015-2020/"><a href="#">Let's Get Physical</a></div>
- <div class="box texts" data-iframe="https://ilu.servus.at/category/10-immateriality.html"><a href="#">Pervasive Labour Union</a></div>
- <div class="box texts" data-iframe="nikosbowb20122020.svg"><a href="#">From community archives to post digital folklore</a></div>
-
- <div class="box texts" data-iframe="https://pzwiki.wdka.nl/mediadesign/User:%CE%94%CE%B5%CF%81%CE%B9%CE%B6%CE%B1%CE%BC%CE%B1%CF%84%CE%B6%CE%BF%CF%81%CF%80%CF%81%CE%BF%CE%BC%CF%80%CE%BB%CE%B5%CE%BC%CE%B9%CE%BD%CE%B1%CF%85%CF%83%CF%84%CF%81%CE%B1%CE%BB%CE%B9%CE%B1/Graduateresearchseminar/emo"><a href="#">The user profile as media object</a></div>
-
- <div class="box texts" data-iframe="open.html"><a href="#">The open+ness of identity</a></div>
-
-
- <!-- Archives -->
- <div class="box archives" data-iframe="asfa.html"><a href="#">Documenting and Preserving art library materials, ASFA</a></div>
- <div class="box archives" data-iframe=""><a href="#">Documenting ERT archive</a></div>
- <div class="box archives" data-iframe=""><a href="#">Advisory Board.Library 2.0. The future of libraries in the digital age</a></div>
- <div class="box archives" data-iframe="nikoshlias.pdf"><a href="#">Archives in transit</a></div>
-
- <div class="box archives" data-iframe=""><a href="#">Collection management and Cataloguing in school libraries</a></div>
- <div class="box archives" data-iframe="mouchette.html"><a href="#">Archiving, documenting, preserving mouchette.org </a></div>
- <div class="box archives" data-iframe=""><a href="#">Information Literacy instruction HAEF</a></div>
- <div class="box archives" data-iframe=""><a href="#">DESTE library</a></div>  
- <!-- Workshops -->
- <div class="box workshops" data-iframe="https://about.mouchette.org/wp-content/uploads/2020/12/Archives_in_transit_Digital_materials_for_educators-2020-21_eng.pdf"><a href="#">Archives in transit</a></div>
- <div class="box workshops" data-iframe=" "><a href="#">Understanding the search algorithm, ASF</a></div>
-<div class="box workshops" data-iframe="https://www.onassis.org/el/whats-on/plasmata"><a href="#">Plasmata: Dreams, Data, and Bodies, OCC</a></div>
-<div class="box workshops" data-iframe="https://www.onassis.org/whats-on/archives-transit-world-libraries-artificial-intelligence/archives-transit-world-libraries-artificial-intelligence-educational-material"><a href="#">Educational material.Archives in Transit</a></div>
-<div class="box workshops" data-iframe="https://maria-varela.com/portfolio/collage-remix-appropriation-archives/"><a href="#">Collage, Remix, and the Digital Cavafy Archive</a></div>
-<div class="box workshops" data-iframe=" "><a href="#">Archive, memory, new forms of community</a></div>
-<div class="box workshops" data-iframe=" "><a href="#">For educators.From the world of libraries to AI</a></div>
-<div class="box workshops" data-iframe="netartvs.html"><a href="#">Net art vs science, Athens Science Fest</a></div>
-<div class="box workshops" data-iframe=" "><a href="#">Remixing Cavafy w. Thodoris Chiotis</a></div>
-<div class="box workshops" data-iframe=" "><a href="#">Member of selection commitee. Communication of science Prize RS ATHINA</a></div>
-
-<div class="box workshops" data-iframe=" "><a href="#">Into the unknown, OCC</a></div>
-<div class="box workshops" data-iframe=" "><a href="#">Digital revolution, OCC</a></div>
-<div class="box workshops" data-iframe=" "><a href="#">Hybrid cities, OCC</a></div>
-<div class="box workshops" data-iframe=" "><a href="#">Art, archives and networks, OCC</a></div>
-<div class="box workshops" data-iframe=" "><a href="#">Appropriating cultural heritage items, HAEF</a></div>
-<div class="box workshops" data-iframe= "https://archive2alive.eu/"><a href="#"> Archive to Alive, IDEC</a></div>
-<div class="box workshops" data-iframe=""><a href="#"> Digital competencies and adult learners,IDEC</a></div>
-<div class="box workshops" data-iframe="https://www.asseffebi.eu/project/cult-tips/?lang=en"><a href="#">Cult tips: innovative teaching practices, IDEC</a></div>
-<div class="box workshops" data-iframe="https://e-trainingcentre.gr/course/index.php?categoryid=22"><a href="#">Computational thinking, guide for educators, IDEC</a></div>
-
-<div class="box workshops" data-iframe="https://2016.adaf.gr/el/event/3d-pop-in-the-browser/"><a href="#">3d pop in the browser, ADAF</a></div>
-
-<!-- Exhibitions -->
-<div class="box exhibitions" data-iframe=" "><a href="#">Unstable Media WPG</a></div>
-<div class="box exhibitions" data-iframe=" "><a href="#">The wrong biennial</a></div>
-<div class="box exhibitions" data-iframe="https://www.furtherfield.org/computers-and-capital-the-rise-of-digital-currency/"><a href="#">Computers and capital</a></div>
-<div class="box exhibitions" data-iframe="CAMERASINBOILERROOM.html"><a href="#"> Cameras in boiler room. Lists and  surveillance </a></div>
- <div class="box exhibitions" data-iframe="https://sharethisart-blog.tumblr.com/"><a href="#">Share this, art and social networks</a></div>
-<div class="box exhibitions" data-iframe=" "><a href="#">404 pages</a></div>
-<div class="box exhibitions" data-iframe="avposthuman.html"><a href="#">Audiovisual Posthumanism </a></div>
-<div class="box exhibitions" data-iframe="afro.html "><a href="#">"Afronaut(a) Film Festival</a></div>
-<div class="box exhibitions" data-iframe="https://about.mouchette.org/reboot/"><a href="#">Reboot: pioneering digital art</a></div>
-<div class="box exhibitions" data-iframe="lecturenikosdatasets.pdf"><a href="#">From lists to datasets</a></div>
-<div class="box exhibitions" data-iframe="muffin.html"><a href="#">Chihuahua or muffin- how to confuse machine learning. Guided tour</a></div>
-<div class="box exhibitions" data-iframe="https://about.mouchette.org/wp-content/uploads/2022/10/ISEA.visions.pdf"><a href="#">
- Martine Neddam at ISEA</a></div>
- <div class="box exhibitions" data-iframe="https://noemata.net/one-off/2021/"><a href="#"> One-Off Moving Image Festival 2021 </a></div>
- <div class="box exhibitions" data-iframe="https://badrobotpoetry.wordpress.com/2012/11/28/a-hyperlink-poem-by-nikos-voyiatzis/"><a href="#"> Bad Robot Poetry </a></div>
-
- <div class="box exhibitions" data-iframe="https://discuss-learning.eu/2021-event/"><a href="#">Design thinking at discuss learning conference</a></div>
- <div class="box exhibitions" data-iframe="https://networkcultures.org/blog/publication/zero-infinite-3-listing-technology/"><a href="#">podcast Listing Technology
-</a></div>  </div>
-
+    <!-- Projects -->
+    <div class="box projects" data-iframe="https://hypersubjectivespaces.tumblr.com/"><a href="#">Hypersubjective spaces</a></div>
+    <div class="box projects" data-iframe="liquid.html"><a href="#">Liquid archiving</a></div>
+    <div class="box projects" data-iframe="MM.html"><a href="#">VJ animations browser based</a></div>
+    <div class="box projects" data-iframe="wblg.html"><a href="#">webgl with sounds</a></div>
+    <div class="box projects" data-iframe="gifs.html"><a href="#">gifs</a></div>
+    <div class="box projects" data-iframe="3.mp4"><a href="#">waiting to get classified</a></div>
+    <div class="box projects" data-iframe="1.mp4"><a href="#">the plan</a></div>
+    <div class="box projects" data-iframe="boilerroomforgot.html"><a href="#">Boiler room forgot</a></div>
+    <div class="box projects" data-iframe="https://bowb.org/apii-artist-community-synergy-nikos-voyiatzis-antigoni-cheilari-cultural-association-pera-melana/"><a href="#">On Plants and Hands</a></div>
+    <div class="box projects" data-iframe="https://about.mouchette.org/nikos-fixes/"><a href="#">Preservation interface for mouchette.org</a></div>
+    <div class="box projects" data-iframe="https://bitcoingarden.tumblr.com/"><a href="#">Bitcoin garden</a></div>
+    <div class="box projects" data-iframe="https://ilu.servus.at/category/06-facebook-reactions.html"><a href="#">Remixing FB reactions</a></div>
+    <div class="box projects" data-iframe="CAMERASINBOILERROOM.html"><a href="#">Cameras in boiler room</a></div>
+    <div class="box projects" data-iframe="https://www.discogs.com/ja/release/5546621-thereisamajorprobleminaustralia-cyborgjungle?srsltid=AfmBOor-6iu1NJalSZ2wOxWRr5pH2tcncd4JxAR16FFJWNaggz6Vsvc0"><a href="#">Cyborgjungle</a></div>
+    <div class="box projects" data-iframe="agirl.html"><a href="#">a girl</a></div>
+    <div class="box projects" data-iframe="thethinker.html"><a href="#">thinker</a></div>
+    
+    <!-- Texts -->
+    <div class="box texts" data-iframe="https://about.mouchette.org/archived-by-nikos/"><a href="#">((DAMN SITE MOUCHETTE!))</a></div>
+    <div class="box texts" data-iframe="https://networkcultures.org/longform/2015/11/06/the-effect-of-the-list/"><a href="#">The effect of the list</a></div>
+    <div class="box texts" data-iframe="https://networkcultures.org/blog/publication/lets-get-physical-a-sample-of-inc-longforms-2015-2020/"><a href="#">Let's Get Physical</a></div>
+    <div class="box texts" data-iframe="https://ilu.servus.at/category/10-immateriality.html"><a href="#">Pervasive Labour Union</a></div>
+    <div class="box texts" data-iframe="nikosbowb20122020.svg"><a href="#">From community archives to post digital folklore</a></div>
+    <div class="box texts" data-iframe="https://pzwiki.wdka.nl/mediadesign/User:%CE%94%CE%B5%CF%81%CE%B9%CE%B6%CE%B1%CE%BC%CE%B1%CF%84%CE%B6%CE%BF%CF%81%CF%80%CF%81%CE%BF%CE%BC%CF%80%CE%BB%CE%B5%CE%BC%CE%B9%CE%BD%CE%B1%CF%85%CF%83%CF%84%CF%81%CE%B1%CE%BB%CE%B9%CE%B1/Graduateresearchseminar/emo"><a href="#">The user profile as media object</a></div>
+    <div class="box texts" data-iframe="open.html"><a href="#">The open+ness of identity</a></div>
+    
+    <!-- Archives -->
+    <div class="box archives" data-iframe="asfa.html"><a href="#">Documenting and Preserving art library materials, ASFA</a></div>
+    <div class="box archives" data-iframe=""><a href="#">Documenting ERT archive</a></div>
+    <div class="box archives" data-iframe=""><a href="#">Advisory Board.Library 2.0. The future of libraries in the digital age</a></div>
+    <div class="box archives" data-iframe="nikoshlias.pdf"><a href="#">Archives in transit</a></div>
+    <div class="box archives" data-iframe=""><a href="#">Collection management and Cataloguing in school libraries</a></div>
+    <div class="box archives" data-iframe="mouchette.html"><a href="#">Archiving, documenting, preserving mouchette.org</a></div>
+    <div class="box archives" data-iframe=""><a href="#">Information Literacy instruction HAEF</a></div>
+    <div class="box archives" data-iframe=""><a href="#">DESTE library</a></div>  
+    
+    <!-- Workshops -->
+    <div class="box workshops" data-iframe="https://about.mouchette.org/wp-content/uploads/2020/12/Archives_in_transit_Digital_materials_for_educators-2020-21_eng.pdf"><a href="#">Archives in transit</a></div>
+    <div class="box workshops" data-iframe=" "><a href="#">Understanding the search algorithm, ASF</a></div>
+    <div class="box workshops" data-iframe="https://www.onassis.org/el/whats-on/plasmata"><a href="#">Plasmata: Dreams, Data, and Bodies, OCC</a></div>
+    <div class="box workshops" data-iframe="https://www.onassis.org/whats-on/archives-transit-world-libraries-artificial-intelligence/archives-transit-world-libraries-artificial-intelligence-educational-material"><a href="#">Educational material.Archives in Transit</a></div>
+    <div class="box workshops" data-iframe="https://maria-varela.com/portfolio/collage-remix-appropriation-archives/"><a href="#">Collage, Remix, and the Digital Cavafy Archive</a></div>
+    <div class="box workshops" data-iframe=" "><a href="#">Archive, memory, new forms of community</a></div>
+    <div class="box workshops" data-iframe=" "><a href="#">For educators.From the world of libraries to AI</a></div>
+    <div class="box workshops" data-iframe="netartvs.html"><a href="#">Net art vs science, Athens Science Fest</a></div>
+    <div class="box workshops" data-iframe=" "><a href="#">Remixing Cavafy w. Thodoris Chiotis</a></div>
+    <div class="box workshops" data-iframe=" "><a href="#">Member of selection commitee. Communication of science Prize RS ATHINA</a></div>
+    <div class="box workshops" data-iframe=" "><a href="#">Into the unknown, OCC</a></div>
+    <div class="box workshops" data-iframe=" "><a href="#">Digital revolution, OCC</a></div>
+    <div class="box workshops" data-iframe=" "><a href="#">Hybrid cities, OCC</a></div>
+    <div class="box workshops" data-iframe=" "><a href="#">Art, archives and networks, OCC</a></div>
+    <div class="box workshops" data-iframe=" "><a href="#">Appropriating cultural heritage items, HAEF</a></div>
+    <div class="box workshops" data-iframe="https://archive2alive.eu/"><a href="#">Archive to Alive, IDEC</a></div>
+    <div class="box workshops" data-iframe=""><a href="#">Digital competencies and adult learners,IDEC</a></div>
+    <div class="box workshops" data-iframe="https://www.asseffebi.eu/project/cult-tips/?lang=en"><a href="#">Cult tips: innovative teaching practices, IDEC</a></div>
+    <div class="box workshops" data-iframe="https://e-trainingcentre.gr/course/index.php?categoryid=22"><a href="#">Computational thinking, guide for educators, IDEC</a></div>
+    <div class="box workshops" data-iframe="https://2016.adaf.gr/el/event/3d-pop-in-the-browser/"><a href="#">3d pop in the browser, ADAF</a></div>
+    
+    <!-- Exhibitions -->
+    <div class="box exhibitions" data-iframe=" "><a href="#">Unstable Media WPG</a></div>
+    <div class="box exhibitions" data-iframe=" "><a href="#">The wrong biennial</a></div>
+    <div class="box exhibitions" data-iframe="https://www.furtherfield.org/computers-and-capital-the-rise-of-digital-currency/"><a href="#">Computers and capital</a></div>
+    <div class="box exhibitions" data-iframe="CAMERASINBOILERROOM.html"><a href="#">Cameras in boiler room. Lists and surveillance</a></div>
+    <div class="box exhibitions" data-iframe="https://sharethisart-blog.tumblr.com/"><a href="#">Share this, art and social networks</a></div>
+    <div class="box exhibitions" data-iframe=" "><a href="#">404 pages</a></div>
+    <div class="box exhibitions" data-iframe="avposthuman.html"><a href="#">Audiovisual Posthumanism</a></div>
+    <div class="box exhibitions" data-iframe="afro.html "><a href="#">"Afronaut(a) Film Festival</a></div>
+    <div class="box exhibitions" data-iframe="https://about.mouchette.org/reboot/"><a href="#">Reboot: pioneering digital art</a></div>
+    <div class="box exhibitions" data-iframe="lecturenikosdatasets.pdf"><a href="#">From lists to datasets</a></div>
+    <div class="box exhibitions" data-iframe="muffin.html"><a href="#">Chihuahua or muffin- how to confuse machine learning. Guided tour</a></div>
+    <div class="box exhibitions" data-iframe="https://about.mouchette.org/wp-content/uploads/2022/10/ISEA.visions.pdf"><a href="#">Martine Neddam at ISEA</a></div>
+    <div class="box exhibitions" data-iframe="https://noemata.net/one-off/2021/"><a href="#">One-Off Moving Image Festival 2021</a></div>
+    <div class="box exhibitions" data-iframe="https://badrobotpoetry.wordpress.com/2012/11/28/a-hyperlink-poem-by-nikos-voyiatzis/"><a href="#">Bad Robot Poetry</a></div>
+    <div class="box exhibitions" data-iframe="https://discuss-learning.eu/2021-event/"><a href="#">Design thinking at discuss learning conference</a></div>
+    <div class="box exhibitions" data-iframe="https://networkcultures.org/blog/publication/zero-infinite-3-listing-technology/"><a href="#">podcast Listing Technology</a></div>
+  </div>
+  
+  <div id="cursor-trail"></div>
+  
   <div id="iframe-container">
     <iframe src="" frameborder="0"></iframe>
-    <!-- Close button moved to bottom left -->
-    <button class="close-btn">&#x2716;</button>
+    <button class="close-btn">CLOSE [X]</button>
   </div>
-
+  
   <script>
+    // Variables
     let zoomLevel = 1;
     let isDragging = false;
     let currentBox = null;
     let startX, startY, boxStartX, boxStartY;
-
+    let cursorTrailDots = [];
+    let maxTrailDots = 15;
+    
+    // Get current date/time and display it
+    function updateDateTime() {
+      const now = new Date();
+      const options = { 
+        year: 'numeric', 
+        month: '2-digit', 
+        day: '2-digit',
+        hour: '2-digit', 
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+      document.getElementById('current-datetime').textContent = now.toLocaleString('en-US', options).replace(',', '');
+    }
+    
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+    
     // Zoom functionality
     document.getElementById('zoom-in').addEventListener('click', () => {
       if (zoomLevel < 3) {
-        zoomLevel += 0.1;
+        zoomLevel += 0.2;
         document.getElementById('zoom-container').style.transform = `scale(${zoomLevel})`;
       }
     });
-
+    
     document.getElementById('zoom-out').addEventListener('click', () => {
       if (zoomLevel > 0.3) {
-        zoomLevel -= 0.1;
+        zoomLevel -= 0.2;
         document.getElementById('zoom-container').style.transform = `scale(${zoomLevel})`;
       }
     });
+    
+    document.getElementById('zoom-reset').addEventListener('click', () => {
+      zoomLevel = 1;
+      document.getElementById('zoom-container').style.transform = `scale(${zoomLevel})`;
+      randomizeBoxPositions();
+    });
+    
+    // Initial cursor trail setup
+    for (let i = 0; i < maxTrailDots; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'cursor-dot';
+      dot.style.opacity = 1 - (i / maxTrailDots);
+      dot.style.transform = `scale(${1 - (i / maxTrailDots)})`;
+      document.getElementById('cursor-trail').appendChild(dot);
+      cursorTrailDots.push(dot);
+    }
+ 
 
+      // Update cursor trail position
+    function updateCursorTrail(e) {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      
+      setTimeout(() => {
+        cursorTrailDots[0].style.left = mouseX + 'px';
+        cursorTrailDots[0].style.top = mouseY + 'px';
+      }, 0);
+      
+      for (let i = cursorTrailDots.length - 1; i > 0; i--) {
+        setTimeout(() => {
+          cursorTrailDots[i].style.left = cursorTrailDots[i-1].style.left;
+          cursorTrailDots[i].style.top = cursorTrailDots[i-1].style.top;
+        }, 0);
+      }
+    }
+    
+    // Add cursor trail event listener
+    document.addEventListener('mousemove', updateCursorTrail);
+    
+    // Randomize box positions with interesting patterns
     function randomizeBoxPositions() {
-      document.querySelectorAll('.box').forEach((box) => {
-        const x = Math.random() * (window.innerWidth - 150);
-        const y = Math.random() * (window.innerHeight - 100);
-        box.style.left = `${x}px`;
-        box.style.top = `${y}px`;
+      const boxes = document.querySelectorAll('.box');
+      const containerWidth = window.innerWidth;
+      const containerHeight = window.innerHeight;
+      const patternType = Math.floor(Math.random() * 4); // 0: random, 1: grid, 2: circle, 3: wave
+      
+      boxes.forEach((box, index) => {
+        let x, y;
+        
+        switch(patternType) {
+          case 0: // Random
+            x = Math.random() * (containerWidth - 200);
+            y = Math.random() * (containerHeight - 150);
+            break;
+          case 1: // Grid
+            const cols = Math.ceil(Math.sqrt(boxes.length));
+            const rows = Math.ceil(boxes.length / cols);
+            const colWidth = containerWidth / cols;
+            const rowHeight = containerHeight / rows;
+            const col = index % cols;
+            const row = Math.floor(index / cols);
+            x = col * colWidth + (Math.random() * 50 - 25);
+            y = row * rowHeight + (Math.random() * 50 - 25);
+            break;
+          case 2: // Circle
+            const radius = Math.min(containerWidth, containerHeight) * 0.4;
+            const angle = (index / boxes.length) * 2 * Math.PI;
+            x = (containerWidth / 2) + radius * Math.cos(angle) - 75;
+            y = (containerHeight / 2) + radius * Math.sin(angle) - 50;
+            break;
+          case 3: // Wave
+            x = (index / boxes.length) * containerWidth;
+            y = (containerHeight / 2) + Math.sin(index * 0.2) * (containerHeight * 0.3);
+            break;
+        }
+        
+        // Add some chaos
+        x += Math.random() * 50 - 25;
+        y += Math.random() * 50 - 25;
+        
+        // Make sure boxes are within viewport
+        x = Math.max(10, Math.min(containerWidth - 200, x));
+        y = Math.max(10, Math.min(containerHeight - 150, y));
+        
+        // Apply positions with a delay for visual effect
+        setTimeout(() => {
+          box.style.transition = 'all 1s cubic-bezier(0.23, 1, 0.32, 1)';
+          box.style.left = `${x}px`;
+          box.style.top = `${y}px`;
+          
+          // Random rotation for more visual interest
+          const rotation = Math.random() * 6 - 3;
+          box.style.transform = `rotate(${rotation}deg)`;
+          
+          // Remove transition after animation
+          setTimeout(() => {
+            box.style.transition = '';
+          }, 1000);
+        }, index * 20);
       });
     }
-
+    
+    // Execute initial positioning
     randomizeBoxPositions();
-
-    // Improved drag handling functions
+    
+    // Visual distortion effect on mouse move
+    document.addEventListener('mousemove', (e) => {
+      const boxes = document.querySelectorAll('.box');
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      
+      boxes.forEach(box => {
+        const rect = box.getBoundingClientRect();
+        const boxCenterX = rect.left + rect.width / 2;
+        const boxCenterY = rect.top + rect.height / 2;
+        
+        const distX = mouseX - boxCenterX;
+        const distY = mouseY - boxCenterY;
+        const distance = Math.sqrt(distX * distX + distY * distY);
+        
+        if (distance < 200 && !isDragging) {
+          const repelStrength = 1 - (distance / 200);
+          const angle = Math.atan2(distY, distX);
+          const pushX = Math.cos(angle) * repelStrength * 20;
+          const pushY = Math.sin(angle) * repelStrength * 20;
+          
+          box.style.transform = `translate(${-pushX}px, ${-pushY}px) rotate(${repelStrength * 5}deg)`;
+        } else {
+          box.style.transform = '';
+        }
+      });
+    });
+    
+    // Drag handlers
     function handleStart(e) {
-      if (e.target.closest('.box')) {
+      if (e.target.closest('.box') && !e.target.closest('a')) {
         isDragging = true;
         currentBox = e.target.closest('.box');
         currentBox.classList.add('active');
-
+        
         // Get touch or mouse coordinates
         const point = e.touches ? e.touches[0] : e;
         startX = point.clientX;
         startY = point.clientY;
-
+        
         // Get box's current position
         const rect = currentBox.getBoundingClientRect();
         boxStartX = rect.left;
         boxStartY = rect.top;
-
+        
         e.preventDefault();
       }
     }
-
+    
     function handleMove(e) {
       if (!isDragging || !currentBox) return;
-
+      
       const point = e.touches ? e.touches[0] : e;
       const deltaX = point.clientX - startX;
       const deltaY = point.clientY - startY;
-
+      
       currentBox.style.left = `${boxStartX + deltaX}px`;
       currentBox.style.top = `${boxStartY + deltaY}px`;
-
+      
+      // Apply some rotation based on movement
+      const rotation = (deltaX * 0.05);
+      currentBox.style.transform = `rotate(${rotation}deg)`;
+      
       e.preventDefault();
     }
-
+    
     function handleEnd(e) {
       if (isDragging && currentBox) {
         const wasDragged = 
@@ -407,13 +731,22 @@
         
         isDragging = false;
         currentBox.classList.remove('active');
-
+        
+        // Reset rotation
+        currentBox.style.transform = '';
+        
         // Only open iframe if the box wasn't dragged
-        if (!wasDragged) {
+        if (!wasDragged && e.target.tagName === 'A') {
           const iframeSrc = currentBox.getAttribute('data-iframe');
           if (iframeSrc && iframeSrc !== '#') {
             const iframeContainer = document.getElementById('iframe-container');
             const iframe = iframeContainer.querySelector('iframe');
+            
+            // Apply glitch effect to iframe opening
+            iframeContainer.style.animation = 'none';
+            iframeContainer.offsetHeight; // Trigger reflow
+            iframeContainer.style.animation = 'glitch 0.3s ease forwards';
+            
             iframe.src = iframeSrc;
             iframeContainer.style.display = 'block';
           }
@@ -422,7 +755,7 @@
         currentBox = null;
       }
     }
-
+    
     // Event listeners for both touch and mouse events
     document.addEventListener('mousedown', handleStart);
     document.addEventListener('mousemove', handleMove);
@@ -430,15 +763,21 @@
     document.addEventListener('touchstart', handleStart, { passive: false });
     document.addEventListener('touchmove', handleMove, { passive: false });
     document.addEventListener('touchend', handleEnd);
-
+    
     // Add click handlers for boxes
     document.querySelectorAll('.box').forEach((box) => {
       box.addEventListener('click', (e) => {
         if (!isDragging) {
           const iframeSrc = box.getAttribute('data-iframe');
-          if (iframeSrc && iframeSrc !== '#') {
+          if (iframeSrc && iframeSrc !== '#' && iframeSrc !== '') {
             const iframeContainer = document.getElementById('iframe-container');
             const iframe = iframeContainer.querySelector('iframe');
+            
+            // Apply glitch effect to iframe opening
+            iframeContainer.style.animation = 'none';
+            iframeContainer.offsetHeight; // Trigger reflow
+            iframeContainer.style.animation = 'glitch 0.3s ease forwards';
+            
             iframe.src = iframeSrc;
             iframeContainer.style.display = 'block';
             e.preventDefault();
@@ -446,48 +785,162 @@
         }
       });
     });
-
-    // Category filtering
+    
+    // Category filtering with visual effects
     document.querySelectorAll('#categories .category').forEach((categoryButton) => {
       categoryButton.addEventListener('click', () => {
+        // Remove active class from all buttons
+        document.querySelectorAll('#categories .category').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        
+        // Add active class to clicked button
+        categoryButton.classList.add('active');
+        
         const category = categoryButton.getAttribute('data-category');
-        document.querySelectorAll('.box').forEach((box) => {
+        const boxes = document.querySelectorAll('.box');
+        
+        boxes.forEach((box) => {
+          // Store original position
+          const originalLeft = box.style.left;
+          const originalTop = box.style.top;
+          
+          // Apply transition for smooth category filtering
+          box.style.transition = 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+          
           if (category === 'all' || box.classList.contains(category)) {
             box.style.display = 'flex';
+            box.style.opacity = '1';
+            box.style.transform = 'scale(1)';
           } else {
-            box.style.display = 'none';
+            box.style.opacity = '0';
+            box.style.transform = 'scale(0.5)';
+            
+            // Hide after animation completes
+            setTimeout(() => {
+              box.style.display = 'none';
+            }, 500);
           }
+          
+          // Remove transition after animation
+          setTimeout(() => {
+            box.style.transition = '';
+          }, 500);
         });
       });
     });
-
-    // Close iframe
+    
+    // Close iframe with visual effect
     document.querySelector('#iframe-container .close-btn').addEventListener('click', () => {
       const iframeContainer = document.getElementById('iframe-container');
       const iframe = iframeContainer.querySelector('iframe');
-      iframe.src = '';
-      iframeContainer.style.display = 'none';
+      
+      // Apply reverse glitch effect
+      iframeContainer.style.animation = 'glitch 0.3s ease-in-out reverse forwards';
+      
+      // Wait for animation to complete before hiding
+      setTimeout(() => {
+        iframe.src = '';
+        iframeContainer.style.display = 'none';
+      }, 300);
     });
-
-    // Random image handling
-    const images = [
-      '4tet.png',
-      '4tet.png',
-      '4tet.png',
-      '4tet.png'
-    ];
-
-    function getRandomImage() {
-      const randomIndex = Math.floor(Math.random() * images.length);
-      const imageElement = document.getElementById('random-image');
-      if (imageElement) {
-        imageElement.src = images[randomIndex];
+    
+    // Show info popup after a delay
+    setTimeout(() => {
+      document.getElementById('info-popup').style.opacity = '1';
+      
+      // Hide it after some time
+      setTimeout(() => {
+        document.getElementById('info-popup').style.opacity = '0';
+      }, 5000);
+    }, 2000);
+    
+    // Extra: Add keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'Escape':
+          // Close iframe
+          if (document.getElementById('iframe-container').style.display === 'block') {
+            document.querySelector('#iframe-container .close-btn').click();
+          }
+          break;
+        case 'r':
+          // Randomize positions
+          randomizeBoxPositions();
+          break;
+        case '+':
+        case '=':
+          // Zoom in
+          document.getElementById('zoom-in').click();
+          break;
+        case '-':
+          // Zoom out
+          document.getElementById('zoom-out').click();
+          break;
+        case '0':
+          // Reset zoom
+          document.getElementById('zoom-reset').click();
+          break;
+      }
+    });
+    
+    // Visual glitch effect on interval
+    function applyRandomGlitch() {
+      const boxes = document.querySelectorAll('.box');
+      const randomBox = boxes[Math.floor(Math.random() * boxes.length)];
+      
+      randomBox.style.transition = 'none';
+      randomBox.style.filter = 'invert(100%)';
+      randomBox.style.transform = `skew(${Math.random() * 10 - 5}deg, ${Math.random() * 10 - 5}deg)`;
+      
+      setTimeout(() => {
+        randomBox.style.filter = '';
+        randomBox.style.transform = '';
+      }, 150);
+    }
+    
+    // Apply random glitch effect periodically
+    setInterval(applyRandomGlitch, 3000);
+    
+    // Add distortion effect to text elements
+    function distortText() {
+      const glitchText = document.querySelector('.glitch-text');
+      if (Math.random() > 0.7) {
+        glitchText.style.letterSpacing = `${Math.random() * 5}px`;
+        
+        setTimeout(() => {
+          glitchText.style.letterSpacing = '';
+        }, 200);
       }
     }
-
-    setInterval(getRandomImage, 5000);
-    getRandomImage();
+    
+    // Distort text periodically
+    setInterval(distortText, 2000);
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      // Ensure boxes stay within visible area
+      document.querySelectorAll('.box').forEach((box) => {
+        const boxLeft = parseInt(box.style.left) || 0;
+        const boxTop = parseInt(box.style.top) || 0;
+        
+        if (boxLeft > window.innerWidth - 150) {
+          box.style.left = `${window.innerWidth - 150}px`;
+        }
+        
+        if (boxTop > window.innerHeight - 100) {
+          box.style.top = `${window.innerHeight - 100}px`;
+        }
+      });
+    });
+    
+    // Easter egg: Double click anywhere to invert colors
+    let isInverted = false;
+    document.addEventListener('dblclick', () => {
+      isInverted = !isInverted;
+      document.body.style.filter = isInverted ? 'invert(100%)' : '';
+      document.getElementById('noise-overlay').style.opacity = isInverted ? '0.3' : '0.15';
+    });
   </script>
-
 </body>
 </html>
