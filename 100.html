@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body {
+                background-color: #ffffff;
+                margin: 0;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <script src="http://brangerbriz.net/labs/threejs_playGnd/js/three.min.js"></script>
+        <script src="http://brangerbriz.net/labs/threejs_playGnd/js/Detector.js"></script>
+        <script>
+
+            if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+            
+            var camera, scene1, renderer;
+            var geometry, material,torus;
+
+            function setup() {
+
+                var W = window.innerWidth/1, H = window.innerHeight;
+                renderer1 = new THREE.WebGLRenderer( { preserveDrawingBuffer: true } );
+				renderer1.autoClearColor = false;
+                renderer1.setSize( W, H );
+                document.body.appendChild( renderer1.domElement );
+
+               
+                camera = new THREE.PerspectiveCamera( 26, W/H, 1, 10000 );
+                camera.position.z = 210;
+
+                scene1 = new THREE.Scene();
+            
+
+                                 bg = document.body.style;
+bg.background = '#000000';
+
+              
+    geometry = new THREE.TorusGeometry(1, 33.25, 34, 23, 3.14);
+for ( var i = 0; i < 310; i ++ ) {
+    material = new THREE.MeshNormalMaterial({shading: THREE.SmoothShading});
+    torus = new THREE.Mesh( geometry, material);
+    torus.position.x = Math.random() * 10000 - 150;
+    torus.position.y = Math.random() * 10000 - 150;
+    torus.position.z = Math.random() * 10000 - 53;
+    torus.rotation.x = Math.random() * 3 * Math.PI;
+    torus.rotation.y = Math.random() * 2 * Math.PI;
+    torus.rotation.z = Math.random() * 3 * Math.PI;
+    scene1.add(torus);
+    
+    
+    
+    
+    
+    
+    }
+
+     }
+           
+
+            function draw() {
+
+                requestAnimationFrame( draw );
+                
+             
+                       
+                torus.rotation.x = Date.now() * 0.01005;  
+                torus.rotation.y = Date.now() * 0.0012;  
+                torus.rotation.z = Date.now() * 0.0101;
+                torus.position.y = Math.sin( Date.now() * 0.002 ) * 11300;
+
+
+               
+                
+                camera.position.z = Math.sin( Date.now() * 0.00112 ) * 1600;
+				camera.position.y = Math.sin( Date.now() * 0.001012 ) * 5600;
+				camera.lookAt(torus.position);
+ 
+             
+             
+                renderer1.render( scene1, camera );
+               
+            }
+
+            setup();
+            draw();
+            
+            
+
+        </script>
+        
+    </body>
+</html>
