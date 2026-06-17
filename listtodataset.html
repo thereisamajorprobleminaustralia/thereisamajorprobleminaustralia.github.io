@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>From lists to datasets</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:Inter,sans-serif;
+background:white;
+color:black;
+}
+
+nav{
+position:fixed;
+top:25px;
+right:25px;
+z-index:999;
+}
+
+nav a{
+border:1px solid black;
+padding:8px 12px;
+text-decoration:none;
+color:black;
+font-size:.8rem;
+}
+
+nav a:hover{
+background:black;
+color:white;
+}
+
+/* LAYOUT */
+
+section{
+padding:6vw;
+border-bottom:2px solid black;
+}
+
+/* HERO QUOTE */
+
+.quote{
+font-size:clamp(2rem,6vw,6rem);
+font-weight:900;
+line-height:.95;
+letter-spacing:-0.05em;
+}
+
+/* SECTION TITLE */
+
+.section-title{
+font-size:clamp(2rem,5vw,5rem);
+font-weight:900;
+margin-bottom:3rem;
+letter-spacing:-0.04em;
+}
+
+/* GRID SYSTEM */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
+}
+
+.card{
+border:2px solid black;
+padding:20px;
+}
+
+.card h3{
+font-weight:900;
+margin-bottom:10px;
+}
+
+.card p{
+line-height:1.6;
+}
+
+/* IMAGE */
+
+.gallery img{
+width:100%;
+max-width:900px;
+border:2px solid black;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+.grid{
+grid-template-columns:1fr;
+}
+
+.quote{
+font-size:2.5rem;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">BACK</a>
+</nav>
+
+<!-- HERO -->
+
+<section>
+<div class="quote">
+A fragmented history <br>
+of information
+organisation </div>
+</section>
+
+<!-- PROJECT CONTEXT -->
+
+ 
+
+<div class="card">
+<h3>Talk , WDKA</h3>
+<p>
+Introducing students into the world of of information
+organisation, concepts of the archive, from words to keywords, from databases 
+to datasets and new forms of archives.
+</p>
+</div>
+
+</div>
+</section>
+
+<!-- RESEARCH FRAME -->
+ 
+ 
+<!-- IMAGE SECTION -->
+ 
+<section>
+<h2 class="section-title"> </h2>
+
+<iframe 
+    src="listtodatasets.pdf" 
+    width="100%" 
+    height="800px"
+    style="border:2px solid black;">
+</iframe>
+</section>
+ 
+ 
+ 
+
+<!-- FOOTER -->
+
+<section style="text-align:center;font-weight:900;">
+new forms of archiving</section>
+
+</body>
+</html>
