@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nikos Voyiatzis</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Inter,sans-serif;
+background:white;
+color:black;
+overflow-x:hidden;
+}
+
+/* =========================
+   LAYOUT SYSTEM
+   ========================= */
+
+section{
+min-height:100vh;
+padding:5vw;
+position:relative;
+border-bottom:2px solid black;
+}
+
+/* =========================
+   BIG NUMBER SYSTEM
+   ========================= */
+
+.big-number{
+position:absolute;
+top:20px;
+right:30px;
+font-size:18vw;
+font-weight:900;
+line-height:1;
+opacity:.06;
+pointer-events:none;
+}
+
+/* =========================
+   HERO
+   ========================= */
+
+.hero{
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.hero h1{
+font-size:clamp(5rem,15vw,18rem);
+font-weight:900;
+line-height:.85;
+letter-spacing:-0.07em;
+max-width:7ch;
+}
+
+.hero p{
+margin-top:2rem;
+font-size:clamp(1rem,2vw,1.5rem);
+max-width:40ch;
+line-height:1.5;
+}
+
+/* =========================
+   MANIFESTO
+   ========================= */
+
+.manifesto{
+font-size:clamp(4rem,14vw,14rem);
+line-height:.9;
+font-weight:900;
+letter-spacing:-0.06em;
+}
+
+/* =========================
+   SECTION TITLE
+   ========================= */
+
+.section-title{
+font-size:clamp(3rem,8vw,8rem);
+font-weight:900;
+letter-spacing:-0.05em;
+margin-bottom:4rem;
+}
+
+/* =========================
+   LINKS (ARCHIVE LISTS)
+   ========================= */
+
+.links{
+display:flex;
+flex-direction:column;
+}
+
+.links a{
+font-size:clamp(1.2rem,2.5vw,3rem);
+text-decoration:none;
+color:black;
+padding:1.2rem 0;
+border-top:2px solid black;
+transition:.25s;
+}
+
+.links a:hover{
+padding-left:40px;
+}
+
+/* =========================
+   NAVIGATION
+   ========================= */
+
+nav{
+position:fixed;
+top:25px;
+right:25px;
+z-index:999;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+max-width:500px;
+justify-content:flex-end;
+}
+
+nav a{
+font-size:.8rem;
+text-decoration:none;
+color:black;
+border:1px solid black;
+padding:8px 12px;
+transition:.2s;
+}
+
+nav a:hover{
+background:black;
+color:white;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.footer{
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:1.5rem;
+font-weight:700;
+padding:5vw;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:5rem;
+}
+
+.manifesto{
+font-size:4rem;
+}
+
+.section-title{
+font-size:3rem;
+}
+
+.links a{
+font-size:1.25rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="#who">WHO</a>
+<a href="#projects">PROJECTS</a>
+<a href="#news">NEWS</a>
+<a href="#texts">TEXTS</a>
+<a href="#archives">ARCHIVES</a>
+<a href="#workshops">WORKSHOPS</a>
+<a href="#public">PUBLIC</a>
+</nav>
+
+<!-- ===================== WHO ===================== -->
+
+<section class="hero" id="who">
+<div class="big-number">01</div>
+
+<h1>NIKOS<br> </h1>
+
+<p>
+Media designer, instuctor, and archivist working on the preservation, documentation, critical
+study and  reuse of often neglected audiovisual and digital heritage.
+</p>
+</section>
+
+<!-- ===================== MANIFESTO ===================== -->
+
+<section>
+<div class="big-number">02</div>
+
+<div class="manifesto">
+ARCHIVES<br>ARE NOT<br>STORAGE
+</div>
+</section>
+
+<!-- ===================== NEWS ===================== -->
+
+<section id="news">
+<div class="big-number">03</div>
+
+<h2 class="section-title">NEWS</h2>
+
+<div class="links">
+ 
+<a href="archiving-without-names.html">Archiving Without Names </a>
+   <a href=" .html"> The juxtaposition of user and archivist in the digital archive</a>
+
+ 
+</div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+
+<section id="projects">
+<div class="big-number">04</div>
+
+<h2 class="section-title">PROJECTS</h2>
+
+<div class="links">
+   <a href="arcwebg.html">Audience as custodians</a>
+<a href="liquid.html">Liquid Archiving</a>
+<a href="MM.html">Browser Based Animation</a>
+<a href="conflicted.html">Conflicted (Aδέσποτα κορμιά)</a>
+<a href="liquid.html">Liquid Archiving</a>
+<a href="femmmmmmm.html">Fem ontologies</a>
+<a href="boilerroomforgot.html">Boiler Room Forgot</a>
+<a href="mouchette.html">Restoration of I Love Mouchette</a>
+<a href="hypersubjectivespaces.html">Hypersubjective Spaces</a>
+<a href=" .html">Facebook after facebook</a>
+<a href="gifs.html">GIFs</a>
+<a href="plants.html">On plants and hands</a>
+<a href="bitcoin-garden.html">Bitcoin Garden</a>
+</div>
+</section>
+
+<!-- ===================== TEXTS ===================== -->
+
+<section id="texts">
+<div class="big-number">05</div>
+
+<h2 class="section-title">TEXTS</h2>
+
+<div class="links">
+<a href="effect-of-the-list.html">The Effect of the List </a>
+<a href="damn-site-mouchette.html">DAMN SITE MOUCHETTE! on accidental archiving</a>
+<a href="open.html">The Open+ness of Identity</a>
+<a href="https://ilu.servus.at/">Pervasive Labour Union Zine</a>
+</div>
+</section>
+
+<!-- ===================== ARCHIVES ===================== -->
+
+<section id="archives">
+<div class="big-number">06</div>
+
+<h2 class="section-title">ARCHIVING</h2>
+
+<div class="links">
+<a href="ert.html">ERT Archive:Documenting tv programms</a>
+
+<a href="mouchette.html">Documenting and preserving Mouchette.org</a>
+
+<a href="plants.html">BOWB: Resident artist archivist</a>
+<a href=" .html">Cavafy Archive: Instructor</a>
+<a href="mouchette-archive.html">Information literacy instructor at HAEF</a>
+
+<a href="archives-in-transit.html">Deste: Arts Librarian</a>
+<a href="asfa.html">ASFA Library: Preservation researcher</a>
+
+</div>
+</section>
+
+<!-- ===================== WORKSHOPS ===================== -->
+
+<section id="workshops">
+<div class="big-number">07</div>
+
+<h2 class="section-title">WORKSHOPS</h2>
+
+<div class="links">
+   <a href="pair-liminal.html">P.A.I.R.. Collaborative Working Group</a>
+<a href="greece-3-liminal.html">Greece 3.0 with Liminal</a>
+<a href="plasmata.html">Plasmata</a>
+<a href="archive-to-alive.html">Archive to Alive</a>
+<a href="netartvs.html">Net Art vs Science</a>
+<a href="digital-creativity.html">Digital Revolution</a>
+<a href=" .html">Hybrids</a>
+<a href=".html">Audiovisual experiments in the browser</a>
+<a href=".html">Understanding search algorithms</a>
+
+<a href=" .html">Collage, Remix and the Digital Archive</a>
+</div>
+</section>
+<section id="workshops">
+<div class="big-number">07</div>
+
+<h2 class="section-title">EDUCATIONAL MATERIAL DESIGN</h2>
+
+<div class="links">
+<a href=" .html">Computational thinking for educators</a>
+<a href=".html">Design thinking for educators</a>
+<a href=".html">Archives in transit: a toolkit for creative and critical reuse in education</a>
+ </div>
+</section>
+
+<!-- ===================== PUBLIC ===================== -->
+
+<section id="public">
+<div class="big-number">08</div>
+
+<h2 class="section-title">TALK</h2>
+
+<div class="links">
+<a href="listtodataset.html">From lists to datasets</a>
+<a href="boilerroom-talk.html">Cameras in Boiler Room. On participatory Surveillance in the club scene</a>
+<a href=" .html">From community archives to post digital folklore</a>
+ <a href=" .html">How to confuse machine learning</a>
+ <a href=" .html">Screen recordings and reinterpretations: From
+archiving to creation, Martine Neddam, ISEA</a>
+<a href="one-off.html">The Politics of the Database / Listing Technologies, Podcast with Kenneth Werbin,Miriam Rasch, Nikos Voyiatzis and Geert Lovink </a>
+</div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+
+<section class="footer">
+THERE IS NO FINAL VERSION OF AN ARCHIVE
+</section>
+
+</body>
+</html>
