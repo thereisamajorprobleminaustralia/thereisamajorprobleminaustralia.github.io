@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fragmented Testimony Archive</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  background: black;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  cursor: crosshair;
+}
+canvas { position: absolute; top:0; left:0; }
+
+#layers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.fragment {
+  position: absolute;
+  max-width: 420px;
+  font-size: 20px;
+  line-height: 1.6;
+  opacity: 0.15;
+  transition: opacity 0.4s, transform 0.6s;
+  filter: blur(1px);
+}
+
+.fragment.active {
+  opacity: 1;
+  filter: blur(0px);
+  transform: scale(1.05);
+}
+
+.fragment.refusal {
+  opacity: 0.05;
+  filter: blur(3px);
+  text-decoration: line-through;
+}
+
+.meta {
+  position: absolute;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  opacity: 0.4;
+}
+
+#meta1 { top: 20px; left: 20px; }
+#meta2 { bottom: 20px; right: 20px; text-align:right; }
+
+#agent {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  opacity: 0.5;
+  text-align: right;
+}
+
+#log {
+  position: absolute;
+  bottom: 60px;
+  left: 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  opacity: 0.35;
+  max-width: 320px;
+}
+
+#mode {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+#tooltip {
+  position: absolute;
+  pointer-events: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  background: rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+#warning {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.3;
+}
+</style>
+</head>
+<body>
+
+<canvas id="gl"></canvas>
+<div id="layers"></div>
+<div id="tooltip"></div>
+
+<div id="mode">MODE: CONFLICTED (click to toggle)</div>
+
+<div id="meta1" class="meta">
+ARCHIVAL FRACTURE SYSTEM<br>
+TESTIMONY DECONSTRUCTION MODE
+</div>
+
+<div id="meta2" class="meta">
+STATUS: UNSTABLE<br>
+VISIBILITY: PARTIAL
+</div>
+
+<div id="agent">
+AGENT: HUMAN USER<br>
+ROLE: ARCHIVIST-OPERATOR<br>
+ACTIONS: <span id="count">0</span>
+</div>
+
+<div id="log">SYSTEM LOG:<br></div>
+
+<div id="warning">click = generate fracture · hover = stabilize + voice + metadata · mode alters ontology</div>
+
+<script>
+let mode = "conflicted"; // conflicted | conflicted_refusal
+
+const fragments = [
+"Η μαρτυρία δεν είναι σταθερή αφήγηση αλλά διαδικασία παραγωγής ορατότητας.",
+"Το σώμα λειτουργεί ως αρχείο εξουσίας και εμπειρίας ταυτόχρονα.",
+"Η εμπειρία δεν προηγείται της καταγραφής — συγκροτείται μέσα της.",
+"Το αρχείο δεν αποθηκεύει απλώς — επιλέγει τι μπορεί να υπάρξει.",
+"Η αλήθεια εμφανίζεται ως αποτέλεσμα επιτέλεσης και όχι αναπαράστασης.",
+"Οι θεσμοί καθορίζουν τα όρια του βιώσιμου λόγου.",
+"Η μαρτυρία είναι χωρική, κινητική, κατακερματισμένη."
+];
+
+const container = document.getElementById("layers");
+const log = document.getElementById("log");
+const countEl = document.getElementById("count");
+const tooltip = document.getElementById("tooltip");
+const modeEl = document.getElementById("mode");
+
+let actions = 0;
+
+function toggleMode(){
+  mode = (mode === "conflicted") ? "conflicted_refusal" : "conflicted";
+  modeEl.innerText = "MODE: " + mode.toUpperCase() + " (click to toggle)";
+}
+
+modeEl.addEventListener("click", toggleMode);
+
+let greekVoice = null;
+
+function speak(text){
+  if(!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'el-GR';
+  u.rate = 0.9;
+  u.pitch = 0.85;
+  window.speechSynthesis.speak(u);
+}
+
+function register(action){
+  actions++;
+  countEl.innerText = actions;
+  const time = new Date().toLocaleTimeString();
+  log.innerHTML = `[${time}] ${action}<br>` + log.innerHTML;
+}
+
+function spawnFragment() {
+  const f = document.createElement("div");
+  f.className = "fragment";
+
+  const text = fragments[Math.floor(Math.random()*fragments.length)];
+
+  const meta = {
+    id: "frag-" + Math.random().toString(36).substring(2,8),
+    regime: "visibility-controlled",
+    authority_conflict: "EU vs embodied testimony",
+    refusal_probability: Math.random()
+  };
+
+  f.innerText = text;
+  f.dataset.meta = JSON.stringify(meta);
+
+  // REFUSAL LOGIC
+  let refused = false;
+  if(mode === "conflicted_refusal" && meta.refusal_probability > 0.7){
+    refused = true;
+    f.classList.add("refusal");
+    f.innerText = "[UNARCHIVABLE TESTIMONY]";
+  }
+
+  f.style.left = Math.random()*80 + "%";
+  f.style.top = Math.random()*80 + "%";
+  f.style.transform = `rotate(${(Math.random()-0.5)*10}deg)`;
+
+  f.addEventListener("mouseenter", () => {
+    f.classList.add("active");
+
+    if(refused){
+      register("refusal encountered → archive silence");
+      return;
+    }
+
+    register("stabilize fragment → " + meta.id);
+    speak(text);
+
+    tooltip.style.opacity = 1;
+    tooltip.innerText = 
+      "ID: " + meta.id + "\n" +
+      "REGIME: conflicted\n" +
+      "AUTHORITY: contested";
+  });
+
+  f.addEventListener("mouseleave", () => {
+    f.classList.remove("active");
+    tooltip.style.opacity = 0;
+    window.speechSynthesis.cancel();
+  });
+
+  f.addEventListener("click", (e) => {
+    e.stopPropagation();
+    register("metadata accessed → " + meta.id);
+  });
+
+  container.appendChild(f);
+  register("fragment generated → " + meta.id);
+
+  setTimeout(()=>{
+    f.style.opacity = 0;
+    setTimeout(()=>f.remove(), 2000);
+  }, 12000);
+}
+
+window.addEventListener("click", spawnFragment);
+for(let i=0;i<6;i++) spawnFragment();
+
+// WebGL background
+const canvas = document.getElementById("gl");
+const gl = canvas.getContext("webgl");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+gl.viewport(0,0,canvas.width,canvas.height);
+
+const vs = `attribute vec4 p;void main(){gl_Position=p;}`;
+const fs = `precision mediump float;
+uniform float t;
+void main(){
+vec2 uv=gl_FragCoord.xy/800.0;
+float n=sin(uv.x*10.+t)*sin(uv.y*10.+t);
+gl_FragColor=vec4(vec3(n*0.1),1.);
+}`;
+
+function sh(t,s){const x=gl.createShader(s);gl.shaderSource(x,t);gl.compileShader(x);return x;}
+const prog=gl.createProgram();
+gl.attachShader(prog,sh(vs,gl.VERTEX_SHADER));
+gl.attachShader(prog,sh(fs,gl.FRAGMENT_SHADER));
+gl.linkProgram(prog);
+gl.useProgram(prog);
+
+const buf=gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+
+const loc=gl.getAttribLocation(prog,"p");
+gl.enableVertexAttribArray(loc);
+gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+
+const timeLoc=gl.getUniformLocation(prog,"t");
+
+function r(t){
+ gl.uniform1f(timeLoc,t*0.001);
+ gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+ requestAnimationFrame(r);
+}
+r();
+</script>
+</body>
+</html>
