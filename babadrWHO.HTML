@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Archival Ecology — Tenth Planet Ep4</title>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  font-family:monospace;
+  background:#e6e6e6;
+}
+
+#title{
+  position:fixed;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#1e4fff;
+  font-weight:bold;
+}
+
+#ui{
+  position:fixed;
+  top:10px;
+  left:10px;
+  width:260px;
+  background:white;
+  border:2px solid #1e4fff;
+  padding:10px;
+  z-index:10;
+}
+
+input, select, button{
+  width:100%;
+  margin-top:5px;
+  padding:6px;
+  border:1px solid #1e4fff;
+  font-family:monospace;
+  background:white;
+}
+
+button{
+  border:1px dashed #1e4fff;
+  cursor:pointer;
+}
+
+svg{
+  width:100vw;
+  height:100vh;
+}
+</style>
+</head>
+
+<body>
+<!--
+ARCHIVAL ECOLOGY REFERENCE NOTES
+CASE: THE TENTH PLANET (EPISODE 4 RECONSTRUCTION)
+
+====================================
+TEMPORAL AXIS
+====================================
+
+Broadcast 1966 (Ep4)
+- Original television transmission.
+- Primary event from which all surviving traces derive.
+
+Wiping Event (BBC)
+- BBC deletion of the master recording.
+- Produced the archival absence.
+
+Fan Audio Recording (1966)
+- Home audio recording made during transmission.
+- Main surviving sound source for reconstruction.
+
+Animation Reconstruction (2013)
+- Official animated recreation.
+- Produced after loss of original visual material.
+
+====================================
+INSTITUTIONAL AXIS
+====================================
+
+BBC Production
+- Original production body.
+
+BBC Archive (Absence)
+- Institutional archive marked by missing material.
+
+Fan Recorder (Unknown)
+- Non-institutional archival agent.
+- Example of distributed preservation.
+
+BBC Animation Team
+- Created reconstruction.
+- Reproduces archival content rather than merely preserving it.
+
+====================================
+AFFECTIVE AXIS
+====================================
+
+Shock (First Regeneration)
+- Audience reaction to the first regeneration.
+
+Nostalgia
+- Motivates collection and reconstruction efforts.
+
+Loss of Episode
+- Cultural memory of disappearance.
+
+Fan Dedication
+- Labour of fans preserving traces and memories.
+
+====================================
+MATERIAL AXIS
+====================================
+
+Missing Master Tape
+- Lost original broadcast recording.
+
+Audio Cassette Recording
+- Surviving fan-made audio document.
+
+Tele-snaps (John Cura)
+- Screen photographs taken during broadcast.
+- Key visual evidence for reconstruction.
+
+Animated Reconstruction File
+- Digital archival object created from surviving traces.
+
+====================================
+OVERLAP NODES
+====================================
+
+Audio × Missing Image
+- Sound survives while image is lost.
+
+Tele-snaps × Reconstruction
+- Photographs guide visual recreation.
+
+Fan Recording × Institutional Absence
+- Preservation outside institutional archive.
+
+Animation × Lost Broadcast
+- Reconstruction substituting for missing original.
+
+Regeneration Scene × Partial Survival
+- Scene survives through multiple traces and versions.
+
+====================================
+PRIMARY ARCHIVAL EVIDENCE
+====================================
+
+1. Original 1966 broadcast
+2. Missing master tape
+3. Fan audio recordings
+4. Audio cassette copies
+5. John Cura telesnaps
+6. BBC production documentation
+7. 2013 animation reconstruction
+8. Digital reconstruction files
+9. Fan memories and testimonies
+10. BBC animation team labour
+
+The archive is modelled as a network of relations, traces,
+institutions, memories, absences, and reconstructions rather
+than a fixed container of preserved objects.
+-->
+<div id="title">
+ARCHIVAL ECOLOGY — THE TENTH PLANET (EP4 RECONSTRUCTION)
+</div>
+
+<div id="ui">
+
+<input id="label" placeholder="node label">
+
+<select id="axis">
+  <option>TEMPORAL AXIS</option>
+  <option>INSTITUTIONAL AXIS</option>
+  <option>AFFECTIVE AXIS</option>
+  <option>MATERIAL AXIS</option>
+  <option>OVERLAP</option>
+</select>
+
+<input id="tags" placeholder="tags (comma separated)">
+
+<button onclick="addNode()">Add Node</button>
+<button onclick="generateMixRoleNode()">Generate Hybrid Node</button>
+
+<button onclick="filterAxis('TEMPORAL AXIS')">Temporal</button>
+<button onclick="filterAxis('INSTITUTIONAL AXIS')">Institutional</button>
+<button onclick="filterAxis('AFFECTIVE AXIS')">Affective</button>
+<button onclick="filterAxis('MATERIAL AXIS')">Material</button>
+<button onclick="resetView()">Reset</button>
+
+<button onclick="exportData()">Export JSON</button>
+
+</div>
+
+<svg></svg>
+
+<script>
+
+/* ================= CASE DATA ================= */
+
+let NODES = [
+
+/* TEMPORAL */
+{id:1,label:"broadcast 1966 (Ep4)", axis:"TEMPORAL AXIS"},
+{id:2,label:"wiping event (BBC)", axis:"TEMPORAL AXIS"},
+{id:3,label:"fan audio recording (1966)", axis:"TEMPORAL AXIS"},
+{id:4,label:"animation reconstruction (2013)", axis:"TEMPORAL AXIS"},
+
+/* INSTITUTIONAL */
+{id:5,label:"BBC production", axis:"INSTITUTIONAL AXIS"},
+{id:6,label:"BBC archive (absence)", axis:"INSTITUTIONAL AXIS"},
+{id:7,label:"fan recorder (unknown)", axis:"INSTITUTIONAL AXIS"},
+{id:8,label:"BBC animation team", axis:"INSTITUTIONAL AXIS"},
+
+/* AFFECTIVE */
+{id:9,label:"shock (first regeneration)", axis:"AFFECTIVE AXIS"},
+{id:10,label:"nostalgia", axis:"AFFECTIVE AXIS", tags:["nostalgia"]},
+{id:11,label:"loss of episode", axis:"AFFECTIVE AXIS"},
+{id:12,label:"fan dedication", axis:"AFFECTIVE AXIS"},
+
+/* MATERIAL */
+{id:13,label:"missing master tape", axis:"MATERIAL AXIS"},
+{id:14,label:"audio cassette recording", axis:"MATERIAL AXIS"},
+{id:15,label:"tele-snaps (John Cura)", axis:"MATERIAL AXIS"},
+{id:16,label:"animated reconstruction file", axis:"MATERIAL AXIS"},
+
+/* OVERLAP */
+{id:100,label:"audio × missing image", axis:"OVERLAP"},
+{id:101,label:"tele-snaps × reconstruction", axis:"OVERLAP"},
+{id:102,label:"fan recording × institutional absence", axis:"OVERLAP"},
+{id:103,label:"animation × lost broadcast", axis:"OVERLAP"},
+{id:104,label:"regeneration scene × partial survival", axis:"OVERLAP"}
+
+];
+
+let LINKS = [
+
+{source:13,target:2},
+{source:14,target:7},
+{source:15,target:101},
+{source:14,target:100},
+{source:16,target:8},
+
+{source:14,target:4},
+{source:15,target:4},
+
+{source:100,target:4,type:"hybrid"},
+{source:101,target:4,type:"hybrid"},
+{source:102,target:6,type:"hybrid"},
+{source:103,target:4,type:"hybrid"}
+
+];
+
+let idCounter = 200;
+
+/* ================= AXIS POSITIONS ================= */
+
+const axisPositions = {
+  "TEMPORAL AXIS": [window.innerWidth * 0.2, window.innerHeight * 0.3],
+  "INSTITUTIONAL AXIS": [window.innerWidth * 0.8, window.innerHeight * 0.3],
+  "AFFECTIVE AXIS": [window.innerWidth * 0.2, window.innerHeight * 0.7],
+  "MATERIAL AXIS": [window.innerWidth * 0.8, window.innerHeight * 0.7],
+  "OVERLAP": [window.innerWidth * 0.5, window.innerHeight * 0.5]
+};
+
+/* ================= COLOR ================= */
+
+const color = d3.scaleOrdinal()
+  .domain(Object.keys(axisPositions))
+  .range(["#ff6b6b","#4ecdc4","#ffe66d","#1a535c","#9b5de5"]);
+
+/* ================= SVG ================= */
+
+const svg = d3.select("svg");
+const linkGroup = svg.append("g");
+const nodeGroup = svg.append("g");
+
+/* ================= SIMULATION ================= */
+
+const sim = d3.forceSimulation(NODES)
+  .force("charge", d3.forceManyBody().strength(-90))
+  .force("collision", d3.forceCollide(28))
+  .force("link", d3.forceLink(LINKS).id(d=>d.id).distance(90))
+  .force("x", d3.forceX(d => axisTargetX(d)).strength(0.35))
+  .force("y", d3.forceY(d => axisTargetY(d)).strength(0.35));
+
+function axisTargetX(d){
+  if(d.tags?.includes("nostalgia")) return window.innerWidth * 0.3;
+  return axisPositions[d.axis][0];
+}
+
+function axisTargetY(d){
+  return axisPositions[d.axis][1];
+}
+
+/* ================= UPDATE ================= */
+
+function update(){
+
+const links = linkGroup.selectAll("line")
+  .data(LINKS);
+
+links.enter()
+  .append("line")
+  .attr("stroke","#999")
+  .attr("stroke-dasharray", d => d.type==="hybrid" ? "4 2" : "0")
+  .merge(links);
+
+links.exit().remove();
+
+const nodes = nodeGroup.selectAll("g")
+  .data(NODES, d=>d.id);
+
+const enter = nodes.enter()
+  .append("g")
+  .call(drag(sim))
+  .on("mouseover", focusNode)
+  .on("mouseout", resetView);
+
+enter.append("circle")
+  .attr("r",9)
+  .attr("fill", d=>color(d.axis));
+
+enter.append("text")
+  .text(d=>d.label)
+  .attr("x",12)
+  .attr("y",4)
+  .style("font-size","11px");
+
+nodes.exit().remove();
+
+sim.nodes(NODES);
+sim.force("link").links(LINKS);
+sim.alpha(1).restart();
+
+sim.on("tick", ()=>{
+
+linkGroup.selectAll("line")
+  .attr("x1", d=>d.source.x)
+  .attr("y1", d=>d.source.y)
+  .attr("x2", d=>d.target.x)
+  .attr("y2", d=>d.target.y);
+
+nodeGroup.selectAll("g")
+  .attr("transform", d=>`translate(${d.x},${d.y})`);
+
+});
+
+}
+
+/* ================= DRAG / RECLASSIFY ================= */
+
+function getClosestAxis(x,y){
+  let min = Infinity;
+  let chosen = "OVERLAP";
+  for(let a in axisPositions){
+    let [ax,ay] = axisPositions[a];
+    let dist = Math.hypot(x-ax,y-ay);
+    if(dist < min){
+      min = dist;
+      chosen = a;
+    }
+  }
+  return chosen;
+}
+
+function drag(sim){
+return d3.drag()
+  .on("start",(event,d)=>{
+    if(!event.active) sim.alphaTarget(0.3).restart();
+    d.fx=d.x; d.fy=d.y;
+  })
+  .on("drag",(event,d)=>{
+    d.fx=event.x; d.fy=event.y;
+  })
+  .on("end",(event,d)=>{
+    if(!event.active) sim.alphaTarget(0);
+
+    let newAxis = getClosestAxis(d.x,d.y);
+
+    if(d.axis !== newAxis){
+      console.log(`Reclassified: ${d.label} → ${newAxis}`);
+      d.axis = newAxis;
+    }
+
+    d.fx=null;
+    d.fy=null;
+    update();
+  });
+}
+
+/* ================= INTERACTION ================= */
+
+function focusNode(event,d){
+nodeGroup.selectAll("g")
+  .style("opacity", n => n===d ? 1 : 0.1);
+
+linkGroup.selectAll("line")
+  .style("opacity", l =>
+    l.source.id===d.id || l.target.id===d.id ? 1 : 0.05
+  );
+}
+
+function resetView(){
+nodeGroup.selectAll("g").style("opacity",1);
+linkGroup.selectAll("line").style("opacity",1);
+}
+
+/* ================= ADD NODE ================= */
+
+function addNode(){
+const label = document.getElementById("label").value;
+const axis = document.getElementById("axis").value;
+const tags = document.getElementById("tags").value
+  .split(",").map(t=>t.trim()).filter(Boolean);
+
+if(!label) return;
+
+NODES.push({
+  id:idCounter++,
+  label,
+  axis,
+  tags
+});
+
+console.log("Added:",label);
+update();
+
+document.getElementById("label").value="";
+document.getElementById("tags").value="";
+}
+
+/* ================= HYBRID ================= */
+
+function generateMixRoleNode(){
+
+const axes = Object.keys(axisPositions).filter(a=>a!=="OVERLAP");
+
+let a1 = axes[Math.floor(Math.random()*axes.length)];
+let a2 = axes[Math.floor(Math.random()*axes.length)];
+
+while(a1===a2){
+  a2 = axes[Math.floor(Math.random()*axes.length)];
+}
+
+const n1 = NODES.find(n=>n.axis===a1);
+const n2 = NODES.find(n=>n.axis===a2);
+
+const newNode = {
+  id:idCounter++,
+  label:`${n1.label} × ${n2.label}`,
+  axis:"OVERLAP",
+  tags:[...(n1.tags||[]),...(n2.tags||[])]
+};
+
+NODES.push(newNode);
+
+LINKS.push({source:n1.id,target:newNode.id,type:"hybrid"});
+LINKS.push({source:n2.id,target:newNode.id,type:"hybrid"});
+
+console.log("Hybrid:",newNode.label);
+
+update();
+}
+
+/* ================= FILTER ================= */
+
+function filterAxis(ax){
+nodeGroup.selectAll("g")
+  .style("opacity", d => d.axis===ax ? 1 : 0.1);
+
+linkGroup.selectAll("line")
+  .style("opacity",0.1);
+}
+
+/* ================= EXPORT ================= */
+
+function exportData(){
+console.log(JSON.stringify({nodes:NODES,links:LINKS},null,2));
+}
+
+/* INIT */
+update();
+
+</script>
+
+</body>
+</html>
